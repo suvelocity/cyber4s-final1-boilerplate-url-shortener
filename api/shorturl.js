@@ -2,6 +2,7 @@ const express = require("express");
 const fsPromise = require("fs/promises");
 const DataBase = require("../utils");
 const validUrl = require("valid-url");
+const shortid = require("shortid");
 const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded());
@@ -12,33 +13,36 @@ router.post("/new", checkExistence, (request, response) => {
   if (!validUrl.isUri(url)) {
     throw new Error("Invalid URL");
   }
-  DB.saveUrl(url).then((url) => {
-    res.status(200).json();
-  });
-  response.status(200).json({
-    original_url: `${url.fullUrl}, short_url: ${url.shortid}`,
-  });
+  DB.saveUrl(url)
+    .then((newUrl) => {
+      response
+        .status(200)
+        .json(` original_url: ${newUrl.fullUrl}, short_url: ${newUrl.shortid}`);
+    })
+    .catch((e) => {
+      response.status(400).send(`${e}`);
+    });
 });
 
 router.get("/:shorturl", (request, response) => {
-  const shortUrl = req.params.shorturl;
-  DB.checkExistenceShortid(shortUrl);
-  response
-    .send(request.body)
-    .then((objUrl) => {
-      if (!objUrl) {
-        throw new Error("Short Url Is Not Found");
+  const shortUrl = request.params.shorturl;
+  DB.checkExistenceShortid(shortUrl, "shortid")
+    .then((urlObj) => {
+      if (!urlObj) {
+        throw new Error("There is no short URL ");
       }
-      res.redirect(`${objUrl.originalUrl}`);
+      console.log(urlObj.fullUrl);
+      DB.updateRedirectClicks(shortUrl);
+      response.redirect(`${urlObj.fullUrl}`);
     })
     .catch((error) => {
-      res.status(404).send(`${error}`);
+      response.status(404).send(`${error}`);
     });
 });
 
 function checkExistence(request, response, next) {
   const url = request.body.url;
-  DB.checkExistence(url)
+  DB.checkExistenceShortid(url, "shortid")
     .then((data) => {
       if (data) {
         response.status(200).json(data);
