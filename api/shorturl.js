@@ -55,4 +55,4 @@ function checkExistence(request, response, next) {
     });
 }
 
-module.exports = router;
+module.exports = { router, DB };
