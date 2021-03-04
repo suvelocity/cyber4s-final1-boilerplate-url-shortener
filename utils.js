@@ -7,49 +7,34 @@ class DataBase {
     this.urls = [];
   }
   saveUrl(fullURL) {
-    const url = new Url(fullURL);
-    this.urls.push(url);
+    const newUrl = new Url(fullURL);
+    this.urls.push(newUrl);
     const data = JSON.stringify(this.urls, null, 4);
-    return fsPromise
-      .writeFile("./DataBase/dataBase.json", data)
-      .then((res) => url);
+    return fsPromise.writeFile("./DataBase/dataBase.json", data).then((res) => {
+      return newUrl;
+    });
   }
-  checkExistence(Url) {
-    return fsPromise
-      .readFile("./DataBase/dataBase.json")
-      .then((res) => {
-        let data = JSON.parse(res);
-        let currentUrl = data.find((urlObj) => {
-          if (urlObj.fullUrl === Url) {
-            return true;
-          }
-        });
-        if (currentUrl) {
-          return currentUrl;
-        }
-        throw new Error();
-      })
-      .catch((e) => {
-        return;
-      });
+  checkExistenceFullUrl(Url) {
+    return compareUrl(Url, "fullUrl");
   }
   checkExistenceShortid(shortUrl) {
-    return fsPromise
-      .readFile("./DataBase/dataBase.json")
-      .then((res) => {
-        let data = JSON.parse(res);
-        let currentShortUrl = data.find((urlObj) => {
-          if (urlObj.shortid === shortUrl) {
+    return compareUrl(shortUrl, "shortid");
+  }
+  updateRedirectClicks(short) {
+    compareUrl(short, "shortid")
+      .then((findUrl) => {
+        const index = this.urls.findIndex((matchUrlInDB) => {
+          if (matchUrlInDB.shortid === findUrl.shortid) {
             return true;
           }
         });
-        if (currentShortUrl) {
-          return currentShortUrl;
-        }
-        throw new Error();
+        this.urls[index].clicks++;
+        console.log(index);
+        return this.urls;
       })
-      .catch((e) => {
-        return;
+      .then((data) => {
+        data = JSON.stringify(data, null, 4);
+        fsPromise.writeFile("./DataBase/dataBase.json", data, (e) => {});
       });
   }
 }
@@ -61,4 +46,24 @@ class Url {
     this.clicks = 0;
   }
 }
+function compareUrl(url, kind) {
+  return fsPromise
+    .readFile("./DataBase/dataBase.json")
+    .then((res) => {
+      let data = JSON.parse(res);
+      let currentUrl = data.find((urlObj) => {
+        if (urlObj[kind] === url) {
+          return true;
+        }
+      });
+      if (currentUrl) {
+        return currentUrl;
+      }
+      throw new Error();
+    })
+    .catch((e) => {
+      return;
+    });
+}
+
 module.exports = DataBase;
