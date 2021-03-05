@@ -1,8 +1,14 @@
 [
-  {
-    "fullUrl": "https://www.youtube.com/watch?v=AGNgfYB69UY",
-    "shortid": "D3vcjPwgS",
-    "createdAt": 1614870806064,
-    "clicks": 1
-  }
+    {
+        "fullUrl": "https://www.youtube.com/",
+        "shortid": "gv5TqP1iQ",
+        "createdAt": "5.3.2021, 12:59:24",
+        "clicks": 2
+    },
+    {
+        "fullUrl": "https://www.youtube.com/watch?v=AGNgfYB69UY",
+        "shortid": "Qh-k5qxty",
+        "createdAt": "5.3.2021, 13:01:43",
+        "clicks": 0
+    }
 ]
