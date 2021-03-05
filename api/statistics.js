@@ -1,13 +1,13 @@
 const express = require("express");
 const fsPromise = require("fs/promises");
 const DataBase = require("../utils");
-const DB = new DataBase();
+const { DB } = require("./shorturl");
 
 const router = express.Router();
 
 router.get("/:shortid", (request, response) => {
   const { shortid } = request.params;
-  DB.checkExistenceShortid(shortid, "shortid")
+  DB.checkExistence(shortid, "shortid")
     .then((statistic) => {
       if (!statistic) {
         response
