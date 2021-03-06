@@ -22,9 +22,9 @@ afterAll(async () => {
     }
   );
 });
+/******************************Testing POST method*******************************************/
 
 describe("POST route tests", () => {
-  //******************Error testing for checking response *********************/
   it("Should save to the dataBase new given url's", async () => {
     const DBLengthBefore = DB.urls.length;
     const res = await request(app).post("/api/shorturl/new").send(newUrl);
@@ -38,13 +38,11 @@ describe("POST route tests", () => {
       .post("/api/shorturl/new")
       .send(testsUrl);
     const storedUrl = DB.urls[0];
-    // Is the status code 200
     expect(response.status).toBe(200);
 
-    // Is the body equal expectedResult
     expect(storedUrl.createdAt).toEqual(expectedResponse.createdAt);
   });
-  //******************Error testing for sending invalid URL *********************/
+
   it("Should return an error message for invalid url", async () => {
     const invalidUrl = { url: "niohgfoeirjgio[rejg].com" };
 
@@ -58,9 +56,7 @@ describe("POST route tests", () => {
   });
 });
 
-// tests for Get Route Tests
-
-/*************************************************************************/
+/*****************************Testing GET method********************************************/
 describe("GET test", () => {
   it("Should get a shorten url and redirect to the original path", async () => {
     const res = await request(app).get("/api/shorturl/gv5TqP1iQ");
@@ -82,15 +78,16 @@ describe("GET test", () => {
         return true;
       }
     });
-    console.log(thisUrl);
     expect(thisUrl.clicks).toBe(2);
   });
 });
+/*******************************Testing statistics method******************************************/
 
 describe("Statistics test", () => {
   it("Should get a short url and send back his obj", async () => {
     const res = await request(app).get("/api/statistics/gv5TqP1iQ");
+    const resElement = `<!DOCTYPE html><html> <head> <title>statistic</title><link rel="stylesheet" href="../../public/style.css"></head><body> <h1> URL Statistics </h1><table> <tr> <th>full Url</th><th>Short Url</th><th>Creation Time</th><th>Redirect Count</th><hr><tr> <td>https://www.youtube.com/</td><td>gv5TqP1iQ</td><td>5.3.2021, 12:59:24</td><td>2</td></tr></tr></table></body></html>`;
     expect(res.status).toBe(200);
-    expect(res.body).toEqual(expectedResponse);
+    expect(res.text).toEqual(resElement);
   });
 });
