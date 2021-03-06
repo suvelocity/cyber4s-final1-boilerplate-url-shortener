@@ -1,21 +1,38 @@
 const fs = require("fs");
 const fsPromise = require("fs/promises");
 const shortid = require("shortid");
+const axios = require("axios");
 let dataBase;
 process.env.NODE_ENV === "test"
   ? (dataBase = "testDataBase")
   : (dataBase = "dataBase");
 
+const ROOT = "https://api.jsonbin.io/b/";
+const APIKEY = "$2b$10$CZt7ltqtf7n5YtsT097M4.AGaB58sIoKEafkw22vKIcNxTystSMmu";
+const binId = "6043b0d4683e7e079c465869";
+const headers = {
+  headers: {
+    "Content-type": "application/json",
+    "X-Master-Key": APIKEY,
+  },
+};
+
 class DataBase {
   constructor() {
     this.urls = [];
-    getData().then((res) => {
-      this.urls = res;
+    getData().then((data) => {
+      this.urls = data;
+      if (!data) {
+        getPersistent().then((res) => {
+          this.urls = res;
+        });
+      }
     });
   }
   saveUrl(fullURL) {
     const newUrl = new Url(fullURL);
     this.urls.push(newUrl);
+    setPersistent(this.urls);
     const data = JSON.stringify(this.urls, null, 4);
     return fsPromise
       .writeFile(`./DataBase/${dataBase}.json`, data)
@@ -56,6 +73,7 @@ class DataBase {
         return this.urls;
       })
       .then((data) => {
+        setPersistent(data);
         data = JSON.stringify(data, null, 4);
         fsPromise.writeFile(`./DataBase/${dataBase}.json`, data, (e) => {});
       });
@@ -93,10 +111,16 @@ function getData() {
     const parseData = JSON.parse(res);
     return parseData;
   });
-  //   .catch((e) => {
-  //     console.error("Can't get data from dataBase");
-  //     return false;
-  //   });
+}
+function setPersistent(urls) {
+  axios.put(`${ROOT}${binId}`, urls, headers);
+}
+
+//get data from json bin
+function getPersistent() {
+  return axios.get(`${ROOT}${binId}`, headers).then((binsData) => {
+    return binsData.data.record;
+  });
 }
 
 module.exports = DataBase;
