@@ -15,7 +15,7 @@ router.get("/:shortid", (request, response) => {
           .json({ msg: new Error("Short Url Does Not Exist") });
         return;
       }
-      response.status(200).json(statistics);
+      response.status(200).render("statisticsTable", statistics);
     })
     .catch((error) => {
       response.status(500).send(`${error}`);

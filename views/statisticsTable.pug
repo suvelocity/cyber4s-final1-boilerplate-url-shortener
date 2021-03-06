@@ -1,0 +1,20 @@
+doctype
+html 
+    head 
+        title statistic
+        link(rel="stylesheet", href="../../public/style.css")
+    body 
+        h1  URL Statistics 
+        table 
+            tr 
+                th full Url
+                th Short Url
+                th Creation Time
+                th Redirect Count
+                hr
+            
+                tr 
+                    td= statistics.fullUrl
+                    td= statistics.shortid
+                    td= statistics.createdAt
+                    td= statistics.clicks
