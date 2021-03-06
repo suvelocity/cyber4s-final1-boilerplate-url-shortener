@@ -16,23 +16,25 @@ const headers = {
     "X-Master-Key": APIKEY,
   },
 };
-
+/***********************CLASSES************************************/
 class DataBase {
+  //bringing the data from the dataBase, if there is no data there, it gets it from JSONBIN
   constructor() {
     this.urls = [];
     getData().then((data) => {
       this.urls = data;
       if (!data) {
-        getPersistent().then((res) => {
+        getFromJSONBIN().then((res) => {
           this.urls = res;
         });
       }
     });
   }
+  //method for saving a new url
   saveUrl(fullURL) {
     const newUrl = new Url(fullURL);
     this.urls.push(newUrl);
-    setPersistent(this.urls);
+    setJSONBIN(this.urls);
     const data = JSON.stringify(this.urls, null, 4);
     return fsPromise
       .writeFile(`./DataBase/${dataBase}.json`, data)
@@ -40,14 +42,14 @@ class DataBase {
         return newUrl;
       });
   }
-
-  checkExistence(url, kind) {
+  //method for checking if a url's object already exists(by any type of property)
+  checkExistence(url, type) {
     return fsPromise
       .readFile(`./DataBase/${dataBase}.json`)
       .then((res) => {
         let data = JSON.parse(res);
         let currentUrl = data.find((urlObj) => {
-          if (urlObj[kind] === url) {
+          if (urlObj[type] === url) {
             return true;
           }
         });
@@ -60,8 +62,9 @@ class DataBase {
         return;
       });
   }
-  updateRedirectClicks(short) {
-    compareUrl(short, "shortid")
+  //method for updating the clicks counter
+  updateClicksCount(short) {
+    this.checkExistence(short, "shortid")
       .then((findUrl) => {
         const index = this.urls.findIndex((matchUrlInDB) => {
           if (matchUrlInDB.shortid === findUrl.shortid) {
@@ -69,16 +72,16 @@ class DataBase {
           }
         });
         this.urls[index].clicks++;
-        console.log(index);
         return this.urls;
       })
       .then((data) => {
-        setPersistent(data);
+        setJSONBIN(data);
         data = JSON.stringify(data, null, 4);
         fsPromise.writeFile(`./DataBase/${dataBase}.json`, data, (e) => {});
       });
   }
 }
+
 class Url {
   constructor(fullUrl) {
     this.fullUrl = fullUrl;
@@ -87,37 +90,22 @@ class Url {
     this.clicks = 0;
   }
 }
-function compareUrl(url, kind) {
-  return fsPromise
-    .readFile(`./DataBase/${dataBase}.json`)
-    .then((res) => {
-      let data = JSON.parse(res);
-      let currentUrl = data.find((urlObj) => {
-        if (urlObj[kind] === url) {
-          return true;
-        }
-      });
-      if (currentUrl) {
-        return currentUrl;
-      }
-      return new Error();
-    })
-    .catch((e) => {
-      return;
-    });
-}
+
+/**********************************FUNCTIONS******************************************** */
+//function for pulling data out of data base
 function getData() {
   return fsPromise.readFile(`./DataBase/${dataBase}.json`).then((res) => {
     const parseData = JSON.parse(res);
     return parseData;
   });
 }
-function setPersistent(urls) {
+//function for updating data in JSONBIN
+function setJSONBIN(urls) {
   axios.put(`${ROOT}${binId}`, urls, headers);
 }
 
-//get data from json bin
-function getPersistent() {
+//function for getting data in JSONBIN
+function getFromJSONBIN() {
   return axios.get(`${ROOT}${binId}`, headers).then((binsData) => {
     return binsData.data.record;
   });

@@ -3,6 +3,7 @@ const app = require("./app");
 const fsPromise = require("fs/promises");
 const { DB } = require("./api/shorturl");
 const { response } = require("express");
+const { locals } = require("./app");
 const testsUrl = { url: "https://www.youtube.com/" };
 const expectedResponse = {
   fullUrl: "https://www.youtube.com/",
@@ -88,6 +89,6 @@ describe("Statistics test", () => {
     const res = await request(app).get("/api/statistics/gv5TqP1iQ");
     const resElement = `<!DOCTYPE html><html> <head> <title>statistic</title><link rel="stylesheet" href="../../public/style.css"></head><body> <h1> URL Statistics </h1><table> <tr> <th>full Url</th><th>Short Url</th><th>Creation Time</th><th>Redirect Count</th><hr><tr> <td>https://www.youtube.com/</td><td>gv5TqP1iQ</td><td>5.3.2021, 12:59:24</td><td>2</td></tr></tr></table></body></html>`;
     expect(res.status).toBe(200);
-    expect(res.text).toEqual(resElement);
+    expect(res.text).toBe(resElement);
   });
 });

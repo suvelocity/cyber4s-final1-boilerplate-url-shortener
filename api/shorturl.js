@@ -1,3 +1,4 @@
+/*************************Declaring variables**********************************/
 const express = require("express");
 const fsPromise = require("fs/promises");
 const DataBase = require("../utils");
@@ -7,8 +8,9 @@ router.use(express.json());
 router.use(express.urlencoded());
 const DB = new DataBase();
 
+/*************************POST method**********************************/
+
 router.post("/new", checkIfExists, (request, response) => {
-  console.log(DB);
   const url = request.body.url;
   if (!validUrl.isUri(url)) {
     response.status(404).json({ msg: `${new Error()}"Invalid URL` });
@@ -26,6 +28,8 @@ router.post("/new", checkIfExists, (request, response) => {
     });
 });
 
+/*************************GET method**********************************/
+
 router.get("/:shorturl", (request, response) => {
   const shortUrl = request.params.shorturl;
   DB.checkExistence(shortUrl, "shortid")
@@ -34,8 +38,7 @@ router.get("/:shorturl", (request, response) => {
         response.status(404).json({ msg: new Error("There is no short URL ") });
         return;
       }
-      console.log(urlObj.fullUrl);
-      DB.updateRedirectClicks(shortUrl);
+      DB.updateClicksCount(shortUrl);
       response.redirect(`${urlObj.fullUrl}`);
     })
     .catch((error) => {
@@ -43,6 +46,8 @@ router.get("/:shorturl", (request, response) => {
     });
 });
 
+/**********************Functions************************************/
+//function for checking if a url already exists
 function checkIfExists(request, response, next) {
   const url = request.body.url;
   DB.checkExistence(url, "fullUrl")
@@ -58,6 +63,5 @@ function checkIfExists(request, response, next) {
       next();
     });
 }
-console.log(DB.urls);
 
 module.exports = { router, DB };
