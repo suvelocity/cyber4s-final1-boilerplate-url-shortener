@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs")
 const app = express();
-
 app.use(cors());
-
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use("/dist", express.static(`./dist`));
 
 app.get("/", (req, res) => {
@@ -11,8 +12,45 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
-
-})
+  const regexCheckOldUrl = /^http[s\/]*/;
+  const regexCheckNewUrl = /[^\d\w]/;
+  const oldURL = req.body.oldurl;
+  console.log("in post");
+  console.log(oldURL);
+  const newUrl = req.params.nameOfNewUrl;
+  if (!regexCheckOldUrl.test(oldURL)) {
+    console.log("in error2");
+    next(403)
+    return
+  }
+  if (regexCheckNewUrl.test(newUrl)) {
+    console.log("in error1");
+    next(403);
+    return
+  }
+  const today = new Date()
+  const UrlObj = {
+    creationDate: today.toISOString().substring(0, 10),
+    redirectCount: 1,
+    originalUrl: oldURL,
+  };
+  try {
+    const UrlNameArray = fs.readdirSync(`${__dirname}/../../DataBase`)
+    for (let value of UrlNameArray) {
+      value = value.replace(/.json/, '');
+      if (value == newUrl) {
+        console.log("file exited");
+        next(401);
+        return;
+      }
+    }
+    fs.writeFileSync(`${__dirname}/../../DataBase/${newUrl}.json`, JSON.stringify(UrlObj));
+    res.send("sucsses");
+  } catch (err) {
+    console.log("in error");
+    next(err)
+  }
+});
 
 app.get("api/statistic/:shorturl-name", (req, res, next) => {
   res.send(/*statics in json */)
@@ -21,6 +59,18 @@ app.get("api/statistic/:shorturl-name", (req, res, next) => {
 app.get("/:wishUrl", (req, res, next) => {
   res.send(/*redirct to the site*/)
 })
+
+app.use((err, req, res, next) => {
+  if (err.status) {
+    console.log('in error')
+    res.status(err.status);
+    res.send();
+  }
+  else {
+    res.status(500);
+    res.send()
+  }
+});
 
 app.listen(process.env.PORT || 8080, () => {
   console.log("server is on");
