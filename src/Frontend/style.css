@@ -1,8 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Aldrich&display=swap");
+:root {
+  --main-color-1: #cb997e;
+  --main-color-2: #ddbea9;
+  --main-color-3: #ffe8d6;
+  --second-color-1: #6b705c;
+  --second-color-2: #a5a58d;
+  --second-color-3: #b7b7a4;
+}
+
 body {
   text-align: center;
   margin: 0;
   padding: 0;
-  background-color: #cb997e;
+  font-family: Aldrich, Arial, Helvetica, sans-serif;
+  background-color: var(--main-color-1);
 }
 header {
   width: 100vw;
@@ -11,7 +22,7 @@ header {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #6b705c;
+  background-color: var(--second-color-1);
 }
 header img {
   position: absolute;
@@ -39,17 +50,37 @@ header a {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 2px solid #cb997e;
-  border-right: 2px solid #cb997e;
+  border-left: 2px solid var(--main-color-1);
+  border-right: 2px solid var(--main-color-1);
 }
 header a:hover {
-  color: #6b705c;
-  background-color: #cb997e;
+  color: var(--second-color-1);
+  background-color: var(--main-color-1);
 }
 header a {
-  color: #ddbea9;
+  color: var(--main-color-2);
   text-decoration: none;
 }
 ul {
   list-style: none;
+}
+#whyusethissiteDIV,
+#shortenOper {
+  margin-left: 0 auto;
+  margin-right: 0 auto;
+  margin-top: 50px;
+  width: 50vw;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: var(--second-color-1);
+  color: var(--main-color-2);
+  border: 2px solid var(--second-color-3);
+  border-radius: 5%;
+}
+section {
+  color: var(--second-color-1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
