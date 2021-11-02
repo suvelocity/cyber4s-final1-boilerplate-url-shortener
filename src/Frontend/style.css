@@ -66,8 +66,6 @@ ul {
 }
 #whyusethissiteDIV,
 #shortenOper {
-  margin-left: 0 auto;
-  margin-right: 0 auto;
   margin-top: 50px;
   width: 50vw;
   padding-left: 10px;
@@ -83,4 +81,23 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.info {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--main-color-3);
+}
+.info:last-child {
+  border-bottom: 0px;
+}
+.infoHeadline {
+  text-decoration: underline;
+  color: var(--main-color-3);
+  display: block;
+}
+.infoText {
+  display: inline;
+}
+.info img {
+  display: inline-block;
 }
