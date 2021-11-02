@@ -1,9 +1,11 @@
 const fs = require("fs")
+const fsAsync = require("fs/promises")
 const path = require("path")
 const util = require("util")
 const readFile = (filename) => util.promisify(fs.readFile)(filename , "utf-8")
 class DataBase{
     static #createShortCut() {
+        const created = true;
         let shortUrl = ""
         for (let i=0; i<7; i++) {
             if (Math.random()<0.5) {
@@ -15,7 +17,7 @@ class DataBase{
         }
         return shortUrl;
     }
-    static async readDataBase() {
+    static async #readDataBase() {
         try {
             const fileData = await readFile("../db.json")
             return await fileData
@@ -24,44 +26,37 @@ class DataBase{
             console.error(error)
         }
     }
-    static #createUrlObj(_originUrl) {
+    static async #createUrlObj(_originUrl) {
+        let newShortCut = await this.#createShortCut();
+        while(await this.#checkIfUrlExist(newShortCut)){
+            newShortCut = await this.#createShortCut();
+        }
         const urlObj = {
             originUrl: _originUrl,
-            shortUrl: this.#createShortCut(),
+            shortUrl: newShortCut,
             views: 0,
         }
         return urlObj;
     }
-    static async writeUrl() {
-        try {
-            const dataBase = await this.readDataBase();
-            // console.log(dataBase.objects)
-        const objectsArr=  await JSON.parse(dataBase).objects;
-        objectsArr.push({"tim" : "tam"});
-        dataBase.objects=objectsArr;
-        fs.writeFile("../db.json", dataBase);
-        return objectsArr;
-        } catch (error) {
-            console.log(error);
-        }
-        
+    static async addObjToDb(originUrl) {
+        await this.#writeUrl(await this.#createUrlObj(originUrl))
+        console.log("written succesfully")
     }
-    static async checkIfUrlExist(){
-        try {
-            const dataBase = await this.readDataBase();
-
-            if(dataBase.includes(shortUrl)){
-                console.log("taken id");
-                return false;
-            }else{
-                return true;
-            }
-            // if(strDataBase.includes(this.#createShortCut))
-           
-        } catch (error) {
-            
+    static async #writeUrl(newObj) {
+        const dataBase = JSON.parse(await this.#readDataBase());
+        const objectsArr=  dataBase.objects;
+        objectsArr.push(newObj);
+        dataBase.objects=objectsArr;
+        await fsAsync.writeFile("../db.json", JSON.stringify(dataBase));
+    }
+    static async #checkIfUrlExist(randomSequence){
+        const dataBase = await this.#readDataBase();
+    for (let obj in dataBase.objects) {
+        if (obj.shortUrl === randomSequence) {
+            return true;
         }
+    }
+    return false;
     }
 }
-DataBase.writeUrl()
-.then((data) => console.log(data))
+DataBase.addObjToDb("https://github.com/zivserphos/cyber4s-final1-boilerplate-url-shortener/tree/development")
