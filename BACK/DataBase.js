@@ -9,7 +9,7 @@ class DataBase {
                 return(err);
            }
            const fileContent = JSON.parse(data);
-           fileContent[shortUrl] = {longUrl, date: new Date().toISOString().slice(0, 10).replace('T', ' '), counter: 0};      
+           fileContent[shortUrl] = {longUrl: longUrl , date: new Date().toISOString().slice(0, 10).replace('T', ' '), counter: 0};      
            fs.writeFile("./DB.json", JSON.stringify(fileContent), 'utf8', (err)=>{})
        }) 
     }
@@ -49,4 +49,4 @@ class DataBase {
 
 }
 
-export default DataBase;
+module.exports = DataBase;

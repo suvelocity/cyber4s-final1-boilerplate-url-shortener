@@ -7,7 +7,7 @@ html {
     display: grid;
     grid-template-columns: repeat(5, 1fr) ;
     grid-template-rows: 40% 10% 10% 10% 10% 10% 10% ;
-    background-image: url(https://www.varchev.com/wp-content/uploads/2015/09/gadgets-bigger-smaller.jpg);
+    background-image: url(./style/gadgets-bigger-smaller.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -25,6 +25,7 @@ html {
     font-size: 50px;
     grid-column: 2/5;
     grid-row: 2/3; 
+    text-align: center;
 }
 
 #root{
