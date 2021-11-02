@@ -11,4 +11,6 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-module.exports = app;
+app.listen(process.env.PORT || 8080, () => {
+  console.log("server is on");
+})
