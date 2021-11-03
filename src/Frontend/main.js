@@ -3,22 +3,16 @@
 const sendOldURLToServerWithNameOfNew = async () => {
   const oldURLvalue = document.getElementById("oldURLinput").value;
   const newURLvalue = document.getElementById("newURLinput").value;
-  if (oldURLvalue == '' || newURLvalue == '') {
+  if (!validator.isLength(newURLvalue, { min: 3, max: 15 })) {
     alert("write something") //change this later;
     return
   }
-  if (newURLvalue.length > 10) {
-    alert("no more than 10");
-    return
-  }
-  const regexCheckOldUrl = /^http[s\/]*/;
-  const regexCheckNewUrl = /[^\d\w]/
-  if (!regexCheckOldUrl.test(oldURLvalue)) {
-    alert("URL HTTPS NOT")
+  if (!validator.isAlphanumeric(newURLvalue)) {
+    alert("enter Valid New Name");
     return 'URL MUST CONTAIN HTTP/S' //change this later
   }
-  if (regexCheckNewUrl.test(newURLvalue)) {
-    alert("nwe URL dont like");
+  if (!validator.isURL(oldURLvalue)) {
+    alert("enter valid URL")
     return 'URL MUST CONTAIN HTTP/S' //change this later
   }
   const response = await axios.post(`http://localhost:8080/api/shorturl/${newURLvalue}`, { oldurl: oldURLvalue });
@@ -27,9 +21,12 @@ const sendOldURLToServerWithNameOfNew = async () => {
 
 const getStatisticFromURL = async () => {
   const userURLValue = document.getElementById("userCustomUrl").value;
-  const regexCheckNewUrl = /[^\d\w]/;
-  if (regexCheckNewUrl.test(userURLValue)) {
-    alert("nwe URL dont like");
+  if (!validator.isLength(userURLValue, { min: 3, max: 15 })) {
+    alert("write something") //change this later;
+    return
+  }
+  if (!validator.isAlphanumeric(userURLValue)) {
+    alert("enter Valid New Name");
     return 'URL MUST CONTAIN HTTP/S' //change this later
   }
   const response = await axios.get(`http://localhost:8080/api/statistic/${userURLValue}`);
@@ -38,9 +35,11 @@ const getStatisticFromURL = async () => {
   divStatics.classList.add("regularDiv");
   divStatics.innerHTML = `
   <h4>${userURLValue}</h4>
+  <div class="statisticParag">
   <p>Special URL Created: <span class="boldWord">${responseUrlOBJ.creationDate}</span></p>
   <p>Number of Entries to URL: <span class="boldWord">${responseUrlOBJ.redirectCount}</span></p>
-  <p>Original URL: <span class="boldWord">${responseUrlOBJ.originalUrl}</span></p>
+  <p>Original URL: <a href="${responseUrlOBJ.originalUrl} target="_blank"><span class="boldWord">${responseUrlOBJ.originalUrl}</span></a></p>
+  </div>
   `;
   document.getElementById("urlStaticSect").appendChild(divStatics);
 }

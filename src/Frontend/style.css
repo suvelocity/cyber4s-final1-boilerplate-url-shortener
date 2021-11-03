@@ -16,6 +16,9 @@ body {
   background-color: var(--main-color-1);
   overflow-x: hidden;
 }
+a {
+  text-decoration: none;
+}
 header {
   width: 100vw;
   height: 100px;
@@ -52,7 +55,6 @@ header li {
   border-left: 2px solid var(--main-color-2);
   border-right: 2px solid var(--main-color-2);
   color: var(--main-color-2);
-  text-decoration: none;
   cursor: pointer;
 }
 header li:hover {
@@ -152,4 +154,22 @@ main {
 }
 .boldWord {
   color: var(--main-color-3);
+}
+#shortenOper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: center;
+}
+#createURLBtn {
+  margin-left: auto;
+  margin-right: auto;
+}
+.statisticParag {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: center;
 }
