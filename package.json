@@ -4,15 +4,15 @@
   "description": "API project for freeCodeCamp",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node ./server/index.js",
+    "dev": "nodemon ./server/index.js",
     "buildFront": "webpack --mode=production --node-env=production",
     "buildFront:dev": "webpack --mode=development",
     "watchFront": "webpack --watch",
     "serveFront": "webpack serve"
-
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

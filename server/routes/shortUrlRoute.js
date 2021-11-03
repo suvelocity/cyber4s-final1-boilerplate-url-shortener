@@ -1,18 +1,16 @@
 const express = require("express");
+const shortUrlRouter = express.Router();
 const fs = require("fs");
 const path = require("path");
-const shortUrlRouter = express.Router();
-const db = require("../models/dataBase");
+const db = require("../models/dataBase.js");
 const { isURL } = require("validator");
-const { nextTick } = require("process");
 
 shortUrlRouter.post("/", async (req, res, next) => {
   if (isURL(req.body.originUrl)) {
     return res.send(await db.addObjToDb(req.body.originUrl));
   } else {
-    next({ status: 400, message: { message: "this is not a valid url" } });
+    next({ status: 400, message: { error: "Invalid URL" } });
   }
 });
-shortUrlRouter.get("/", async (req, res) => {});
 
 module.exports = shortUrlRouter;
