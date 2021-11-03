@@ -18,8 +18,6 @@ button.addEventListener("click", async function(){
     }
 })
 
-
-
 function displayUrl(newUrl){
     URLOutput.setAttribute("href", newUrl);
     URLOutput.innerText = newUrl
