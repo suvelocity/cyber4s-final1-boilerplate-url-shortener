@@ -52,8 +52,23 @@ app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
   }
 });
 
-app.get("api/statistic/:shorturl-name", (req, res, next) => {
-  res.send(/*statics in json */)
+app.get("/api/statistic/:shorturl", (req, res, next) => {
+  try {
+    const givenUrl = req.params.shorturl;
+    const UrlNameArray = fs.readdirSync(`${__dirname}/../../DataBase`);
+    for (let value of UrlNameArray) {
+      value = value.replace(/.json/, '');
+      if (value == givenUrl) {
+        const urlObj = fs.readFileSync(`${__dirname}/../../DataBase/${value}.json`);
+        res.send(urlObj);
+        return;
+      }
+    }
+    next(404);
+  } catch (err) {
+    console.log("in error");
+    next(err);
+  }
 });
 
 app.get("/:wishUrl", (req, res, next) => {
