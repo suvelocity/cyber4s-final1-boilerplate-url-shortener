@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
-const { url } = require("inspector");
+const validator = require('validator');
 const app = express();
 app.use(cors());
 app.use(express.json()) // for parsing application/json
@@ -13,21 +13,24 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
-  const regexCheckOldUrl = /^http[s\/]*/;
-  const regexCheckNewUrl = /[^\d\w]/;
   const oldURL = req.body.oldurl;
   console.log("in post");
   console.log(oldURL);
   const newUrl = req.params.nameOfNewUrl;
-  if (!regexCheckOldUrl.test(oldURL)) {
+  if (!validator.isURL(oldURL)) {
     console.log("in error2");
     next(403)
     return
   }
-  if (regexCheckNewUrl.test(newUrl)) {
-    console.log("in error1");
-    next(403);
+  if (!validator.isLength(newUrl, { min: 3, max: 15 })) {
+    console.log("in error length");
+    next(403) //change this later;
     return
+  }
+  if (!validator.isAlphanumeric(newUrl)) {
+    console.log("in error alpha bet");
+    next(403);
+    return 'URL MUST CONTAIN HTTP/S' //change this later
   }
   const today = new Date()
   const UrlObj = {
