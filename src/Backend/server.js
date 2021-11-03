@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const fs = require("fs")
+const fs = require("fs");
+const { url } = require("inspector");
 const app = express();
 app.use(cors());
 app.use(express.json()) // for parsing application/json
@@ -71,7 +72,31 @@ app.get("/api/statistic/:shorturl", (req, res, next) => {
   }
 });
 
-app.get("/:wishUrl", (req, res, next) => {
+app.get("/:wishUrl", async (req, res, next) => {
+  try {
+    const givenUrl = req.params.wishUrl;
+    const UrlNameArray = fs.readdirSync(`${__dirname}/../../DataBase`);
+    for (let value of UrlNameArray) {
+      value = value.replace(/.json/, '');
+      if (value == givenUrl) {
+        const urlObj = JSON.parse(fs.readFileSync(`${__dirname}/../../DataBase/${value}.json`));
+        const redirectUrl = urlObj.originalUrl;
+        urlObj.redirectCount++;
+        fs.writeFile(`${__dirname}/../../DataBase/${value}.json`, JSON.stringify(urlObj), (err) => {
+          if (err) {
+            console.log(err);
+            throw err
+          }
+        });
+        res.redirect(redirectUrl);
+        return;
+      }
+    }
+    next(404);
+  } catch (err) {
+    console.log(err);
+    next(err)
+  }
   res.send(/*redirct to the site*/)
 })
 
