@@ -1,6 +1,5 @@
 'use strict'
-
-const sendOldURLToServerWithNameOfNew = () => {
+const sendOldURLToServerWithNameOfNew = async () => {
   const oldURLvalue = document.getElementById("oldURLinput").value;
   const newURLvalue = document.getElementById("newURLinput").value;
   if (oldURLvalue == '' || newURLvalue == '') {
@@ -21,7 +20,8 @@ const sendOldURLToServerWithNameOfNew = () => {
     alert("nwe URL dont like");
     return 'URL MUST CONTAIN HTTP/S' //change this later
   }
-  alert("yay")
+  const response = await axios.post(`http://localhost:8080/api/shorturl/${newURLvalue}`, { oldurl: oldURLvalue });
+  console.log(response);
 }
 
 document.getElementById("createURLBtn").addEventListener("click", sendOldURLToServerWithNameOfNew);
