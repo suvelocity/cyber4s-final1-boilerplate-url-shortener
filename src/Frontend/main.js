@@ -25,3 +25,18 @@ const sendOldURLToServerWithNameOfNew = async () => {
 }
 
 document.getElementById("createURLBtn").addEventListener("click", sendOldURLToServerWithNameOfNew);
+
+
+///style
+document.getElementById("getUrlLink").addEventListener("click", () => {
+  document.getElementById("getUrlSect").style.left = "0%"
+  document.getElementById("getUrlLink").classList.add("active");
+  document.getElementById("urlStaticSect").style.left = "100%"
+  document.getElementById("getStatsLink").classList.remove("active")
+});
+document.getElementById("getStatsLink").addEventListener("click", () => {
+  document.getElementById("getUrlSect").style.left = "-100%"
+  document.getElementById("getUrlLink").classList.remove("active")
+  document.getElementById("urlStaticSect").style.left = "0%"
+  document.getElementById("getStatsLink").classList.add("active")
+});;
