@@ -14,8 +14,6 @@ app.get("/", (req, res) => {
 
 app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
   const oldURL = req.body.oldurl;
-  console.log("in post");
-  console.log(oldURL);
   const newUrl = req.params.nameOfNewUrl;
   if (!validator.isURL(oldURL)) {
     console.log("in error2");
@@ -49,7 +47,7 @@ app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
       }
     }
     fs.writeFileSync(`${__dirname}/../../DataBase/${newUrl}.json`, JSON.stringify(UrlObj));
-    res.send("sucsses");
+    res.send(`${newUrl}`);
   } catch (err) {
     console.log("in error");
     next(err)

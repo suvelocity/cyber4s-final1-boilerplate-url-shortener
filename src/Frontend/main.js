@@ -1,4 +1,5 @@
 'use strict'
+const Host = `http://localhost:8080`;
 
 const sendOldURLToServerWithNameOfNew = async () => {
   const oldURLvalue = document.getElementById("oldURLinput").value;
@@ -15,8 +16,14 @@ const sendOldURLToServerWithNameOfNew = async () => {
     createErrorInputUI(document.getElementById("newURLinput"), "New Url Name Must Contain Only AlphaBet and Numbers");
     return
   }
-  const response = await axios.post(`http://localhost:8080/api/shorturl/${newURLvalue}`, { oldurl: oldURLvalue });
-  console.log(response);
+  try {
+    const response = await axios.post(`${Host}/api/shorturl/${newURLvalue}`, { oldurl: oldURLvalue });
+    const fullnewURL = `${Host}/${response.data}`;
+    clearBadInput();
+    document.getElementById("newURLlink").innerHTML = `New URL Is Born : <a href="${fullnewURL}" target="_blank">${fullnewURL}</a>`
+  } catch (err) {
+    createErrorInputUI(document.getElementById("newURLinput"), "URL is Taken");
+  }
 }
 
 const getStatisticFromURL = async () => {
@@ -30,7 +37,7 @@ const getStatisticFromURL = async () => {
     return
   }
   try {
-    const response = await axios.get(`http://localhost:8080/api/statistic/${userURLValue}`);
+    const response = await axios.get(`${Host}/api/statistic/${userURLValue}`);
     const responseUrlOBJ = response.data;
     const divStatics = document.createElement("DIV");
     divStatics.classList.add("regularDiv");

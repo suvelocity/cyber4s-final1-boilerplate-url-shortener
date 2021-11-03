@@ -124,17 +124,17 @@ section {
   background-color: var(--second-color-1);
   border: 1px solid var(--main-color-1);
 }
-input[type="text"] {
+input {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 8px;
   margin: 8px;
   display: inline-block;
-  /* border: 1px solid #ccc; */
+  border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
-input[type="text"]:focus {
+input:focus {
   border: 3px solid var(--main-color-1);
 }
 main {
@@ -178,4 +178,7 @@ main {
 }
 .badInputPara {
   color: tomato;
+}
+#newURLlink {
+  color: var(--main-color-3);
 }
