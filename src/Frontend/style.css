@@ -64,16 +64,16 @@ header a {
 ul {
   list-style: none;
 }
-#whyusethissiteDIV,
-#shortenOper {
+.regularDiv {
   margin-top: 50px;
+  margin-bottom: 20px;
   width: 50vw;
   padding-left: 10px;
   padding-right: 10px;
   background-color: var(--second-color-1);
   color: var(--main-color-2);
   border: 2px solid var(--second-color-3);
-  border-radius: 5%;
+  border-radius: 20px;
 }
 section {
   color: var(--second-color-1);
@@ -101,7 +101,7 @@ section {
 .info img {
   display: inline-block;
 }
-#createURLBtn {
+.regularBtn {
   background-color: var(--main-color-2);
   border: none;
   border-radius: 15px;
@@ -115,7 +115,7 @@ section {
   cursor: pointer;
   margin-bottom: 10px;
 }
-#createURLBtn:hover {
+.regularBtn:hover {
   color: var(--main-color-2);
   background-color: var(--second-color-1);
   border: 1px solid var(--main-color-1);

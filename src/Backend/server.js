@@ -97,7 +97,6 @@ app.get("/:wishUrl", async (req, res, next) => {
     console.log(err);
     next(err)
   }
-  res.send(/*redirct to the site*/)
 })
 
 app.use((err, req, res, next) => {
