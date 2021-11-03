@@ -109,9 +109,9 @@ GOOD LUCK!
   - [x] check if uid is realy unique
 - [x] GET /<UID>
   - [x] store user req data
-  - [x] redirect to the URL
-- [x] GET /app
-  - [x] serve the static from ./public folder
+  - [] redirect to the URL
+- [] GET /app
+  - [] serve the static from ./public folder
 - [x] GET /api/stats/<UID>
   - [x] respond with JSON of the stats
 - [x] **refactoring**
