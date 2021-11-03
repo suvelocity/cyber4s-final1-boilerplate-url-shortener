@@ -16,19 +16,16 @@ app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
   const oldURL = req.body.oldurl;
   const newUrl = req.params.nameOfNewUrl;
   if (!validator.isURL(oldURL)) {
-    console.log("in error2");
-    next(403)
+    next({ status: 401, msg: "Go Away" })
     return
   }
   if (!validator.isLength(newUrl, { min: 3, max: 15 })) {
-    console.log("in error length");
-    next(403) //change this later;
+    next({ status: 401, msg: "Go Away" })
     return
   }
   if (!validator.isAlphanumeric(newUrl)) {
-    console.log("in error alpha bet");
-    next(403);
-    return 'URL MUST CONTAIN HTTP/S' //change this later
+    next({ status: 401, msg: "Go Away" })
+    return
   }
   const today = new Date()
   const UrlObj = {
@@ -41,15 +38,13 @@ app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
     for (let value of UrlNameArray) {
       value = value.replace(/.json/, '');
       if (value == newUrl) {
-        console.log("file exited");
-        next(401);
+        next({ status: 401, msg: "URL Taken" });
         return;
       }
     }
     fs.writeFileSync(`${__dirname}/../../DataBase/${newUrl}.json`, JSON.stringify(UrlObj));
     res.send(`${newUrl}`);
   } catch (err) {
-    console.log("in error");
     next(err)
   }
 });
@@ -66,7 +61,7 @@ app.get("/api/statistic/:shorturl", (req, res, next) => {
         return;
       }
     }
-    next(404);
+    next({ status: 404, msg: "URL NOT FOUND" });
   } catch (err) {
     console.log("in error");
     next(err);
@@ -93,22 +88,24 @@ app.get("/:wishUrl", async (req, res, next) => {
         return;
       }
     }
-    next(404);
+    next({ status: 404, msg: "Wrong Path" });
   } catch (err) {
     console.log(err);
-    next(err)
+    next({ status: 404, msg: "Wrong Path" });
   }
 })
 
 app.use((err, req, res, next) => {
+  console.log(err);
   if (err.status) {
-    console.log('in error')
-    res.status(err.status);
-    res.send();
+    res.statusMessage = err.msg
+    res.status(err.status).send({
+      status: err.status,
+      message: err.msg,
+    });
   }
   else {
-    res.status(500);
-    res.send()
+    res.send(500)
   }
 });
 
