@@ -130,7 +130,7 @@ input[type="text"] {
   padding-left: 8px;
   margin: 8px;
   display: inline-block;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -172,4 +172,10 @@ main {
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: center;
+}
+.badInput {
+  border: 3px solid tomato;
+}
+.badInputPara {
+  color: tomato;
 }
