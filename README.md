@@ -40,6 +40,7 @@ Optionally, You can create a github [action](https://docs.github.com/en/actions)
 - Use a `class DataBase{}` to read/write (**Asynchronously**) all data in your back-end (you can use a json file as persistent layer)
 
 - Add another functionality to your service: a statistics route (`api/statistic/:shorturl-id`) that will respond with the following data per `shorturl-id`:
+
   - `creationDate` - a SQLDate format
   - `redirectCount` - the amount of times this url was used for redirection
   - `originalUrl`
@@ -70,8 +71,47 @@ Optionally, You can create a github [action](https://docs.github.com/en/actions)
 - Git usage: meaningful commit messages, small commits, folder and file structures, README file, issues, etc...
 
 ## Submitting
+
 - Submit your solution repo link - an open PR from your dev branch to the main one
 - Your readme should have a [`repl.it`](https://repl.it/) link with your solutions.
 - Submit a link to your repo to the CRM.
 
 GOOD LUCK!
+
+### Misc
+
+- [ ] **Add workflow scripts**
+  - [x] build - webpack build ./web into ./public folder
+  - [ ] dev - start a nodemon server && start webpack dev server
+  - [ ] deploy to heroku
+
+### Front
+
+- [ ] **make better design**
+- [x] **home page** - /app
+  - [x] url shorten input -> POST /api/shrten/ { url: <input url> }
+  - [x] bootstrap sexy design
+  - [x] nice error display
+- [ ] **stats page** /app/<UID>
+  - [ ] requests the stats from -> GET /api/stats/<UID>
+  - [ ] error display
+  - [ ] add dashboard with stats display:
+    - [ ] locations of requests
+    - [ ] unique requesters
+    - [ ] usage graph
+
+### Back
+
+- [x] POST /api/shorten/ { url: <input url> }
+  - [x] validate url
+  - [x] check if already was shortened
+  - [x] return the shorterned url
+  - [x] check if uid is realy unique
+- [x] GET /<UID>
+  - [x] store user req data
+  - [x] redirect to the URL
+- [x] GET /app
+  - [x] serve the static from ./public folder
+- [x] GET /api/stats/<UID>
+  - [x] respond with JSON of the stats
+- [x] **refactoring**
