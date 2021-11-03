@@ -15,36 +15,29 @@ class DataBase {
     }
 
     getLongUrlFromStorage(shortUrl){
-        fs.readFile("./DB.json", (err, data)=>{
-            if(err){
-                return(err);
-            }
-            const fileContent = JSON.parse(data);
-            fileContent[shortUrl].counter += 1;
-            fs.writeFile("./DB.json", JSON.stringify(fileContent), 'utf8', (err)=>{err})
-            const LongUrl = fileContent[shortUrl].longUrl;
-            return LongUrl;
-        })    
+        const data = fs.readFileSync("./DB.json")
+        const fileContent = JSON.parse(data);
+        const slicedURL = (shortUrl.slice(1));          
+        fileContent[slicedURL].counter += 1;
+        
+        const toSend = JSON.stringify(fileContent);
+        fs.writeFileSync("./DB.json", toSend)
+        const LongUrl = fileContent[slicedURL].longUrl;
+        
+        return LongUrl;
+           
     }
 
     getDateFromStorage(shortUrl){
-        fs.readFile("./DB.json", (err, data)=>{
-            if(err){
-                return(err);
-            }
-            const fileContent = JSON.parse(data);
-            return fileContent[shortUrl].date;
-        })    
+        const data = fs.readFileSync("./DB.json")
+        const fileContent = JSON.parse(data);
+        return fileContent[shortUrl].date;   
     }
 
     getCounterFromStorage(shortUrl){
-        fs.readFile("./DB.json", (err, data)=>{
-            if(err){
-                return(err);
-            }
-            const fileContent = JSON.parse(data);
-            return fileContent[shortUrl].counter;
-        })    
+        const data = fs.readFileSync("./DB.json")
+        const fileContent = JSON.parse(data);
+        return fileContent[shortUrl].counter;   
     }
 
 }
