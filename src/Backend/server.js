@@ -60,7 +60,7 @@ app.get("/api/statistic/:shorturl", (req, res, next) => {
     for (let value of UrlNameArray) {
       value = value.replace(/.json/, '');
       if (value == givenUrl) {
-        const urlObj = fs.readFileSync(`${__dirname}/../../DataBase/${value}.json`);
+        const urlObj = fs.readFileSync(`${__dirname}/../../DataBase/${value}.json`, 'utf-8');
         res.send(urlObj);
         return;
       }

@@ -25,10 +25,6 @@ header {
   align-items: center;
   background-color: var(--second-color-1);
 }
-* {
-  transition: all 500ms ease-out;
-  -webkit-transition: all 500ms ease-out;
-}
 header img {
   position: absolute;
   left: 0px;
@@ -78,6 +74,8 @@ ul {
   border-radius: 20px;
 }
 section {
+  transition: all 530ms ease-out;
+  -webkit-transition: all 530ms ease-out;
   display: block;
   width: 100%;
   color: var(--second-color-1);
@@ -151,4 +149,7 @@ main {
 .active {
   color: var(--second-color-1);
   background-color: var(--main-color-1);
+}
+.boldWord {
+  color: var(--main-color-3);
 }

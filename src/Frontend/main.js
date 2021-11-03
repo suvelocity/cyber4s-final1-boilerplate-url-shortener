@@ -1,4 +1,5 @@
 'use strict'
+
 const sendOldURLToServerWithNameOfNew = async () => {
   const oldURLvalue = document.getElementById("oldURLinput").value;
   const newURLvalue = document.getElementById("newURLinput").value;
@@ -24,7 +25,30 @@ const sendOldURLToServerWithNameOfNew = async () => {
   console.log(response);
 }
 
+const getStatisticFromURL = async () => {
+  const userURLValue = document.getElementById("userCustomUrl").value;
+  const regexCheckNewUrl = /[^\d\w]/;
+  if (regexCheckNewUrl.test(userURLValue)) {
+    alert("nwe URL dont like");
+    return 'URL MUST CONTAIN HTTP/S' //change this later
+  }
+  const response = await axios.get(`http://localhost:8080/api/statistic/${userURLValue}`);
+  const responseUrlOBJ = response.data;
+  const divStatics = document.createElement("DIV");
+  divStatics.classList.add("regularDiv");
+  divStatics.innerHTML = `
+  <h4>${userURLValue}</h4>
+  <p>Special URL Created: <span class="boldWord">${responseUrlOBJ.creationDate}</span></p>
+  <p>Number of Entries to URL: <span class="boldWord">${responseUrlOBJ.redirectCount}</span></p>
+  <p>Original URL: <span class="boldWord">${responseUrlOBJ.originalUrl}</span></p>
+  `;
+  document.getElementById("urlStaticSect").appendChild(divStatics);
+}
 document.getElementById("createURLBtn").addEventListener("click", sendOldURLToServerWithNameOfNew);
+document.getElementById("getStatsticBtn").addEventListener("click", getStatisticFromURL);
+
+
+
 
 
 ///style
