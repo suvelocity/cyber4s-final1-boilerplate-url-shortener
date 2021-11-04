@@ -17,15 +17,18 @@ router.post('/shorten/:longURL', (req, res) => {
         shortURL = nanoid(6);
     }
     linksDb.store(shortURL, longURL);
-    console.log(linksDb)
-    res.send(linksDb);
+    // console.log(linksDb)
+    // res.send(linksDb);
+    res.send();
 })
 
-router.get('/:shortURL', (req, res) => {
+router.get('/:shortURL', (req, res, next) => {
     const shortURL = req.params.shortURL;
     const longURL = linksDb.getValue(shortURL);
-    if(!longURL) throw Error ('404');
-    res.send(longURL);
+    console.log()
+    if(!longURL) next('404');
+    location.href = 'https://www.google.com/'
+    res.send();
 })
 
 
