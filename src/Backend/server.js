@@ -11,7 +11,12 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(express.static(`${__dirname}/../../Assest`));
 app.use("/error/404", express.static(`../Frontend`, { index: 'notfound.html' }));
 app.use("/", express.static(`../Frontend`));
-console.log(process.env);
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "../Frontend/index.html");
+});
+app.get("/error/404", (req, res) => {
+  res.sendFile(__dirname + "../Frontend/notfound.html");
+});
 
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
