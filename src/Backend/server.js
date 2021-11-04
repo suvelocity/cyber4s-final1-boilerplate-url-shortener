@@ -14,10 +14,10 @@ app.use("/error/404", express.static(`../Frontend`, { index: 'notfound.html' }))
 app.use("/", express.static(`../Frontend`));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("../index.html"));
+  res.sendFile(path.resolve("../src/Frontend/index.html"));
 });
 app.get("/error/404", (req, res) => {
-  res.sendFile(path.resolve("../notfound.html"));
+  res.sendFile(path.resolve("../src/Frontend/notfound.html"));
 });
 
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
