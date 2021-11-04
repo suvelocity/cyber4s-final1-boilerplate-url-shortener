@@ -9,7 +9,7 @@ const myURL = " https://yurls.herokuapp.com/"
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "../dist")));     //able to read statics files
+app.use(express.static(path.join(__dirname, "../Front/src")));     //able to read statics files
 
 app.use("/", (req,res, next)=>{
   if(req. _parsedOriginalUrl.path === "/" || req. _parsedOriginalUrl.path === "/makeurl"|| req.  _parsedOriginalUrl.path === "/status"
