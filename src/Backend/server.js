@@ -10,8 +10,8 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 app.use(express.static(`${__dirname}/../../Assest`));
-app.use("/error/404", express.static(`../Frontend`, { index: 'notfound.html' }));
-app.use("/", express.static(`../Frontend`));
+app.use("/error/404", express.static(`${__dirname}/../Frontend`, { index: 'notfound.html' }));
+app.use("/", express.static(`${__dirname}/../Frontend`));
 
 app.get("/", (req, res) => {
   res.sendFile(`${__dirname}/../Frontend/index.html`);
