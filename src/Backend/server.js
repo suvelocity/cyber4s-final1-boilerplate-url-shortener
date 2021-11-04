@@ -1,8 +1,9 @@
+require('dotenv').config({ path: __dirname + '/../../.env' });
 const express = require("express");
-const cors = require("cors");
 const validator = require('validator');
 const axios = require('axios');
 const app = express();
+const cors = require("cors");
 app.use(cors());
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -10,7 +11,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(express.static(`${__dirname}/../../Assest`));
 app.use("/error/404", express.static(`../Frontend`, { index: 'notfound.html' }));
 app.use("/", express.static(`../Frontend`));
-
+console.log(process.env);
 
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
@@ -37,7 +38,7 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
     const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
       headers: {
         "Content-Type": "application/json",
-        "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
+        "X-Master-Key": process.env.API_SECRET_KEY,
       }
     });
     const EGShortURLOBJ = getResponse.data.record;
@@ -45,7 +46,7 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
     const putResponse = await axios.put(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, JSON.stringify(EGShortURLOBJ), {
       headers: {
         "Content-Type": "application/json",
-        "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
+        "X-Master-Key": process.env.API_SECRET_KEY,
       }
     });
     res.send(`${newUrl}`);
@@ -60,7 +61,7 @@ app.get("/api/statistic/:shorturl", async (req, res, next) => {
     const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
       headers: {
         "Content-Type": "application/json",
-        "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
+        "X-Master-Key": process.env.API_SECRET_KEY,
       }
     });
     const EGShortURLOBJ = getResponse.data.record;
@@ -84,7 +85,7 @@ app.get("/:wishUrl", async (req, res, next) => {
     const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
       headers: {
         "Content-Type": "application/json",
-        "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
+        "X-Master-Key": process.env.API_SECRET_KEY,
       }
     });
     const EGShortURLOBJ = getResponse.data.record;
@@ -95,7 +96,7 @@ app.get("/:wishUrl", async (req, res, next) => {
         const putResponse = axios.put(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, JSON.stringify(EGShortURLOBJ), {
           headers: {
             "Content-Type": "application/json",
-            "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
+            "X-Master-Key": process.env.API_SECRET_KEY,
           }
         });
         res.redirect(redirectUrl);
