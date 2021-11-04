@@ -10,15 +10,16 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 app.use(express.static(`${__dirname}/../../Assest`));
-app.use("/error/404", express.static(`../Frontend`, { index: 'notfound.html' }));
-app.use("/", express.static(`../Frontend`));
+app.use("/error/404", express.static(`${__dirname}/../Frontend`, { index: 'notfound.html' }));
+app.use("/", express.static(`${__dirname}/../Frontend`));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("../Frontend/index.html"));
+  res.sendFile(`${__dirname}/../Frontend/index.html`);
 });
 app.get("/error/404", (req, res) => {
-  res.sendFile(path.resolve("../Frontend/notfound.html"));
+  res.sendFile(`${__dirname}/../Frontend/Frontend/notfound.html`);
 });
+
 
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
