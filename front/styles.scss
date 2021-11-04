@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,500;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Teko:wght@300&family=Ubuntu:ital,wght@0,500;1,400&display=swap");
 #wrapper {
   text-align: center;
   display: flex;
@@ -9,6 +9,55 @@ h3 {
 }
 h4 {
   font-family: "Ubuntu", sans-serif;
+}
+#footer {
+  font-family: "Teko", sans-serif;
+  margin: 0 auto;
+  display: inline;
+  margin-top: 40vh;
+}
+#urlInput {
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  border: 0.5px grey solid;
+  transform: scale(1.5);
+  width: 50%;
+  margin: auto;
+  font-family: "Dosis", sans-serif;
+}
+#resultUrl {
+  margin-top: 6vh;
+  font-family: "Ubuntu", sans-serif;
+  padding-top: 10vh;
+}
+// link style
+a:link {
+  color: #f56fad;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: #f56fad;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: cornflowerblue;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.statsBtn {
+  font-weight: 600;
+  font-size: 12px;
+  transform: scale(0.7);
+  padding-top: 3vh;
+  // font-family: "Ubuntu", sans-serif;
 }
 $brown: #2b2520;
 $green: #39dbc2;

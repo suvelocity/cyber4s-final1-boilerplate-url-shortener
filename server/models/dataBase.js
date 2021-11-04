@@ -96,5 +96,15 @@ class DataBase {
     }
     return false;
   }
+  static async getObjectByShortUrl(_shortUrl) {
+    console.log(_shortUrl);
+    let dataBase = await this.#readDataBase();
+    dataBase = JSON.parse(dataBase);
+    for (let i = 0; i < dataBase.objects.length; i++) {
+      if (dataBase.objects[i].shortUrl === _shortUrl) {
+        return dataBase.objects[i];
+      }
+    }
+  }
 }
 module.exports = DataBase;
