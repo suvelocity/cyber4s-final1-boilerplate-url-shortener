@@ -5,11 +5,11 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 8080;
 const dataBaseUse = new DataBase;
-const myURL = "http://localhost:8080"
+const myURL = "https://shakedurl.herokuapp.com/ "
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "./src")));     //able to read statics files
+app.use(express.static(path.join(__dirname, "../dist")));     //able to read statics files
 
 app.use("/", (req,res, next)=>{
   if(req. _parsedOriginalUrl.path === "/" || req. _parsedOriginalUrl.path === "/makeurl"|| req.  _parsedOriginalUrl.path === "/status"
@@ -18,7 +18,7 @@ app.use("/", (req,res, next)=>{
     try {
       const requestEnd = (req. _parsedOriginalUrl.path);
       const longURL = dataBaseUse.getLongUrlFromStorage(requestEnd);
-      res.redirect(longURL);
+      res.redirect(longURL.slice(1,longURL.length-1));
     } catch (error) {
       res.send(error);
     }
@@ -26,32 +26,32 @@ app.use("/", (req,res, next)=>{
 })
 
 app.get("/", (req,res)=>{              //homepage                             
-  res.sendFile("C:/Users/owner/Desktop/קורס CYBER4S/29.08/cyber4s-final1-boilerplate-url-shortener/Front/index.html");
+  res.sendFile("../dist/index.html");
 })
 
 app.get("/makeurl", function(req,res){
   try {
     const longUrl = JSON.stringify(req.headers.longurl);
     const customShort = req.headers.shorturl;
-    if(!customShort == undefined){
-      console.log('why am i here');
+    if(customShort){
+      console.log("in first If");
       if(dataBaseUse.isDuplicate(customShort)){
-        throw "url taken already"
+        throw "URL taken already"
       }
       else{
+        console.log("in else");
         dataBaseUse.storeUrlRelation(longUrl, customShort);
-        res.send(homeUrl + "/" + customShort)
+        res.send(myURL + "/" + customShort)
       }
     }
     
     if(dataBaseUse.isExistLong(longUrl)){
       const existingUrl = dataBaseUse.isExistLong(longUrl)
-      console.log(homeUrl + "/" + existingUrl);
-      res.send(homeUrl + "/" + existingUrl);
+      res.send(myURL + "/" + existingUrl);
     }
     else{
     const shortURL = makeId(4);
-    dataBaseUse.storeUrlRelation(longURL, shortURL);
+    dataBaseUse.storeUrlRelation(longUrl, shortURL);
     res.send(myURL + "/" + shortURL);
     }
   } catch (error) {
@@ -60,15 +60,17 @@ app.get("/makeurl", function(req,res){
 })
 
 app.get("/status", function (req,res){
-    const shortURL = req.headers.shorturl;
-    const slicedUrl = (shortURL.slice(22));
-    
-    const counter = dataBaseUse.getCounterFromStorage(slicedUrl);
-    const longurl =dataBaseUse.getLongUrlFromStorage(`/${slicedUrl}`);
-    const date =dataBaseUse.getDateFromStorage(slicedUrl);
-    const data = {counter, longurl, date};
-    console.log(data);
-    res.send(data);
+    try {
+        const shortURL = req.headers.shorturl;
+        const slicedUrl = (shortURL.slice(22));
+        const counter = dataBaseUse.getCounterFromStorage(slicedUrl);
+        const longurl =dataBaseUse.getLongUrlFromStorage(`/${slicedUrl}`);
+        const date =dataBaseUse.getDateFromStorage(slicedUrl);
+        const data = {counter, longurl, date};
+        res.send(data);
+    } catch (error) {
+      
+    }
 })
 
 function makeId(length) {

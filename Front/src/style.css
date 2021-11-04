@@ -1,40 +1,42 @@
 html {
     height: 100%;
   }
-  body {
-    
+body {
+    overflow-x: hidden;
     min-height: 100%;
     display: grid;
     grid-template-columns: repeat(5, 1fr) ;
-    grid-template-rows: 40% 10% 10% 10% 10% 10% 10% ;
+    grid-template-rows: 10% 30% 10% 10% 10% 10% 10% 10% ;
     background-image: url(../style/gadgets-bigger-smaller.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    overflow-x: hidden;
+    overflow-y: hidden ;
 }
 
 #header {
     text-align: center;
     color: aliceblue;
-    font-size: 700%;
+    font-size: 600%;
     grid-column: 2/5;
-    grid-row: 1/2;
+    grid-row: 2/3;
 }
 
 #UrlInput{
     height: 95%;
     font-size: 50px;
     grid-column: 2/5;
-    grid-row: 2/3; 
+    grid-row: 4/5; 
     text-align: center;
 }
 
 #root{
     text-align: center;
     grid-column: 1/6;
-    grid-row: 4/5; 
-    font-size: 150px;
+    grid-row: 6/7; 
+    font-size: 400%;
     color: orange;
-    margin-left: 5%;
+    margin-bottom: 5%;
     text-shadow: 
       -1px -1px 1px #efede3, 
       0px 1px 0 #2e2e2e, 
@@ -58,11 +60,90 @@ html {
       8px 28px 35px rgba(0, 0, 0, 0.9);
 }
 
+#customeURL{
+    height: 50%;
+    font-size: 50px;
+    grid-column: 3/4;
+    grid-row: 5/6; 
+    text-align: center;
+    margin-top: 5% ;
+}
+
 #go{
-    height: 6rem;
+    height: 100%;
     width:6rem;
     margin-left: 2%;
     grid-column: 5/6;
-    grid-row: 2/3; 
+    grid-row: 4/5; 
     font-size: 45PX; 
+}
+
+/*navbar*/
+#navbar{
+    text-align: center;
+    font-size: 50px;
+    grid-column: 1/6;
+    grid-row: 1/2;
+    background-color: rgb(240, 164, 23, 0.85);     
+}
+
+
+
+.navactive{
+    background-color: rgba(25, 143, 197, 1);
+    padding:1rem;  
+}
+
+#stats{
+    text-align: center;
+    color: aliceblue;
+    font-size: 600%;
+    grid-column: 2/5;
+    grid-row: 2/3;
+    visibility: hidden;
+}
+
+#home:hover{
+    background-color: aqua;
+}
+#home{
+    padding:1rem;
+    width: 10%;
+    margin-right: 15%;
+    cursor: pointer;
+}
+
+#statsBtn{
+    padding:1rem;
+    width: 10%;
+    cursor: pointer;
+}
+
+#statsBtn:hover{
+    background-color: aqua;
+}
+
+#shorturl{
+    height: 25%;
+    font-size: 50px;
+    grid-column: 2/5;
+    grid-row: 4/5; 
+    text-align: center;
+}
+
+#getstates{
+    height: 25%;
+    width:3rem;
+    margin-left: 2%;
+    grid-column: 5/6;
+    grid-row: 4/5; 
+    font-size: 15PX;
+}
+
+.showinfo{
+    font-size: 80px;
+}
+
+.showinfosmall{
+    font-size: 40px;
 }
