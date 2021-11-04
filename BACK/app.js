@@ -3,9 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-const port = process.env.PORT || 8080;
 const dataBaseUse = new DataBase;
-const myURL = " https://yurls.herokuapp.com/"
+const myURL = " https://yurls.herokuapp.com"
 
 app.use(cors());
 
