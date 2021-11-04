@@ -7,7 +7,7 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr) ;
     grid-template-rows: 10% 30% 10% 10% 10% 10% 10% 10% ;
-    background-image: url(../style/gadgets-bigger-smaller.jpg);
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrOEtEdVdbSHZy6EOVB3cA1Vpnc1ZClsUI9A&usqp=CAU");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     overflow-x: hidden;

@@ -26,7 +26,7 @@ app.use("/", (req,res, next)=>{
 })
 
 app.get("/", (req,res)=>{              //homepage                             
-  res.sendFile("../dist/index.html");
+  res.sendFile("dist/index.html");
 })
 
 app.get("/makeurl", function(req,res){
