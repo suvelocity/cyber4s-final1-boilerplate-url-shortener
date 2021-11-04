@@ -1,4 +1,5 @@
 require('dotenv').config({ path: __dirname + '/../../.env' });
+const path = require("path")
 const express = require("express");
 const validator = require('validator');
 const axios = require('axios');
@@ -11,11 +12,12 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(express.static(`${__dirname}/../../Assest`));
 app.use("/error/404", express.static(`../Frontend`, { index: 'notfound.html' }));
 app.use("/", express.static(`../Frontend`));
+
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "../Frontend/index.html");
+  res.sendFile(path.resolve("../Frontend/index.html"));
 });
 app.get("/error/404", (req, res) => {
-  res.sendFile(__dirname + "../Frontend/notfound.html");
+  res.sendFile(path.resolve("../Frontend/notfound.html"));
 });
 
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
