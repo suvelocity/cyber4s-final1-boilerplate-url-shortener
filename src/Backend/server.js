@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.sendFile(`${__dirname}/../Frontend/index.html`);
 });
 app.get("/error/404", (req, res) => {
-  res.sendFile(`${__dirname}/../Frontend/Frontend/notfound.html`));
+  res.sendFile(`${__dirname}/../Frontend/Frontend/notfound.html`);
 });
 
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
