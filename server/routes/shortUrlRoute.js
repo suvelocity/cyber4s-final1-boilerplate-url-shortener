@@ -6,10 +6,14 @@ const db = require("../models/dataBase.js");
 const { isURL } = require("validator");
 
 shortUrlRouter.post("/", async (req, res, next) => {
-  if (isURL(req.body.originUrl)) {
-    return res.send(await db.addObjToDb(req.body.originUrl));
-  } else {
-    next({ status: 400, message: { error: "Invalid URL" } });
+  try {
+    if (isURL(req.body.originUrl)) {
+      return res.send(await db.addObjToDb(req.body.originUrl));
+    } else {
+      next({ status: 400, message: { error: "Invalid URL" } });
+    }
+  } catch (error) {
+    next({ status: 500, message: { error: "Internal server error" } });
   }
 });
 

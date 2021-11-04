@@ -9,6 +9,7 @@ reDirectRouter.get("/:shortUrl", async (req, res, next) => {
   try {
     const originUrl = await db.getOriginUrl(req.params.shortUrl);
     if (!originUrl) {
+      console.log({ status: 404, message: { error: "NOT FOUND" } });
       throw { status: 404, message: { error: "NOT FOUND" } };
     }
     if (originUrl.slice(0, 5) !== "http") {
@@ -17,6 +18,7 @@ reDirectRouter.get("/:shortUrl", async (req, res, next) => {
 
     res.redirect(originUrl);
   } catch (err) {
+    console.log({ status: 500, message: "Internal server error" });
     next({ status: 500, message: "Internal server error" });
   }
 });

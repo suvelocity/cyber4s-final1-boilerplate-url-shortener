@@ -36,7 +36,7 @@ async function getShortenUrl(originUrl) {
   } catch (err) {
     clearResultDiv();
     const errorsDiv = document.querySelector(".errors");
-    errorsDiv.textContent = "Invalid Url";
+    errorsDiv.textContent = `${err} or invalid url`;
     setTimeout(() => {
       errorsDiv.firstChild.remove();
     }, 3000);
@@ -85,7 +85,9 @@ async function getStats(sequence) {
 
     return stats;
   } catch (err) {
-    console.log("fails in get stats");
+    console.log(err);
+    const errorsDiv = document.querySelector(".errors");
+    errorsDiv.textContent = `${err} /faild to get stats`;
   }
 }
 
