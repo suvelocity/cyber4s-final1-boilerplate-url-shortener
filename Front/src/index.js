@@ -12,7 +12,7 @@ const root = document.getElementById("root");
 
 
 
-const myAPI = " https://yurls.herokuapp.com/"
+const myAPI = " https://yurls.herokuapp.com"
 
 button.addEventListener("click", async function(){
     try {
