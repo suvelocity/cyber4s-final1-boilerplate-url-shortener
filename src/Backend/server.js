@@ -6,11 +6,11 @@ const app = express();
 app.use(cors());
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use("/dist", express.static(`./dist`));
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "../Frontend/index.html");
-});
+app.use(express.static(`${__dirname}/../../Assest`));
+app.use("/error/404", express.static(`../Frontend`, { index: 'notfound.html' }));
+app.use("/", express.static(`../Frontend`));
+
 
 app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
   const oldURL = req.body.oldurl;
@@ -88,10 +88,12 @@ app.get("/:wishUrl", async (req, res, next) => {
         return;
       }
     }
-    next({ status: 404, msg: "Wrong Path" });
+    res.redirect('/error/404');
+    return
   } catch (err) {
     console.log(err);
-    next({ status: 404, msg: "Wrong Path" });
+    res.redirect('/error/404');
+    return
   }
 })
 
