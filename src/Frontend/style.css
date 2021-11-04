@@ -108,15 +108,20 @@ section {
 }
 
 .regularDiv {
-  margin-top: 50px;
-  margin-bottom: 20px;
-  width: 50vw;
+  width: 40vw;
   padding-left: 10px;
   padding-right: 10px;
   background-color: var(--second-color-1);
   color: var(--main-color-2);
   border: 2px solid var(--second-color-3);
   border-radius: 20px;
+  margin: 30px;
+}
+#getUrlContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 .info {
@@ -129,14 +134,16 @@ section {
   border-bottom: 0px;
 }
 
+.infoText {
+  display: inline;
+  text-align: left;
+}
+
 .infoHeadline {
   text-decoration: underline;
   color: var(--main-color-3);
   display: block;
-}
-
-.infoText {
-  display: inline;
+  text-align: center;
 }
 
 .info img {
@@ -187,7 +194,10 @@ input:focus {
   position: absolute;
   left: 100%;
 }
-
+#aboutSect {
+  position: absolute;
+  left: 200%;
+}
 #shortenOper {
   display: flex;
   flex-direction: column;
@@ -234,6 +244,19 @@ input:focus {
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: center;
+}
+
+#aboutDiv img {
+  height: 3em;
+  width: 3em;
+  cursor: pointer;
+}
+#aboutDiv img:hover {
+  opacity: 0.66;
+}
+#logosParag {
+  display: inline-flex;
+  align-items: center;
 }
 
 .boldWord {
