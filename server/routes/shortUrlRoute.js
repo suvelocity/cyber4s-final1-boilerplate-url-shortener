@@ -6,6 +6,7 @@ const db = require("../models/dataBase.js");
 const { isURL } = require("validator");
 
 shortUrlRouter.post("/", async (req, res, next) => {
+  console.log("ggg");
   if (isURL(req.body.originUrl)) {
     return res.send(await db.addObjToDb(req.body.originUrl));
   } else {

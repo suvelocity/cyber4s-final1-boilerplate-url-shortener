@@ -6,8 +6,8 @@ const path = require("path");
 const db = require("../models/dataBase.js");
 
 statsRouter.get("/:shortUrl", async (req, res, next) => {
+  console.log("zzz");
   try {
-    console.log(req.params.shortUrl);
     let stats = await db.getObjectByShortUrl(req.params.shortUrl);
     console.log(stats);
     if (!stats) {

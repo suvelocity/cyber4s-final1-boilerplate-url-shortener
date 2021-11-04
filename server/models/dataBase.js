@@ -6,7 +6,6 @@ const moment = require("moment");
 const readFile = (filename) => util.promisify(fs.readFile)(filename, "utf-8");
 class DataBase {
   static #createShortCut() {
-    const created = true;
     let shortUrl = "";
     for (let i = 0; i < 7; i++) {
       if (Math.random() < 0.5) {
