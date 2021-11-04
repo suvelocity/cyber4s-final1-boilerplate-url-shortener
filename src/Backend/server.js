@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const fs = require("fs");
 const validator = require('validator');
+const axios = require('axios');
 const app = express();
 app.use(cors());
 app.use(express.json()) // for parsing application/json
@@ -12,7 +12,7 @@ app.use("/error/404", express.static(`../Frontend`, { index: 'notfound.html' }))
 app.use("/", express.static(`../Frontend`));
 
 
-app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
+app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
   const newUrl = req.params.nameOfNewUrl;
   if (!validator.isURL(oldURL)) {
@@ -34,29 +34,39 @@ app.post("/api/shorturl/:nameOfNewUrl", (req, res, next) => {
     originalUrl: oldURL,
   };
   try {
-    const UrlNameArray = fs.readdirSync(`${__dirname}/../../DataBase`)
-    for (let value of UrlNameArray) {
-      value = value.replace(/.json/, '');
-      if (value == newUrl) {
-        next({ status: 401, msg: "URL Taken" });
-        return;
+    const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
       }
-    }
-    fs.writeFileSync(`${__dirname}/../../DataBase/${newUrl}.json`, JSON.stringify(UrlObj));
+    });
+    const EGShortURLOBJ = getResponse.data.record;
+    EGShortURLOBJ[newUrl] = UrlObj;
+    const putResponse = await axios.put(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, JSON.stringify(EGShortURLOBJ), {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
+      }
+    });
     res.send(`${newUrl}`);
   } catch (err) {
     next(err)
   }
 });
 
-app.get("/api/statistic/:shorturl", (req, res, next) => {
+app.get("/api/statistic/:shorturl", async (req, res, next) => {
   try {
     const givenUrl = req.params.shorturl;
-    const UrlNameArray = fs.readdirSync(`${__dirname}/../../DataBase`);
-    for (let value of UrlNameArray) {
-      value = value.replace(/.json/, '');
+    const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
+      }
+    });
+    const EGShortURLOBJ = getResponse.data.record;
+    for (let value in EGShortURLOBJ) {
       if (value == givenUrl) {
-        const urlObj = fs.readFileSync(`${__dirname}/../../DataBase/${value}.json`, 'utf-8');
+        const urlObj = EGShortURLOBJ[value];
         res.send(urlObj);
         return;
       }
@@ -71,17 +81,21 @@ app.get("/api/statistic/:shorturl", (req, res, next) => {
 app.get("/:wishUrl", async (req, res, next) => {
   try {
     const givenUrl = req.params.wishUrl;
-    const UrlNameArray = fs.readdirSync(`${__dirname}/../../DataBase`);
-    for (let value of UrlNameArray) {
-      value = value.replace(/.json/, '');
+    const getResponse = await axios.get(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
+      }
+    });
+    const EGShortURLOBJ = getResponse.data.record;
+    for (let value in EGShortURLOBJ) {
       if (value == givenUrl) {
-        const urlObj = JSON.parse(fs.readFileSync(`${__dirname}/../../DataBase/${value}.json`));
-        const redirectUrl = urlObj.originalUrl;
-        urlObj.redirectCount++;
-        fs.writeFile(`${__dirname}/../../DataBase/${value}.json`, JSON.stringify(urlObj), (err) => {
-          if (err) {
-            console.log(err);
-            throw err
+        const redirectUrl = EGShortURLOBJ[value].originalUrl;
+        EGShortURLOBJ[value].redirectCount++;
+        const putResponse = axios.put(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, JSON.stringify(EGShortURLOBJ), {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key": "$2b$10$Kd3FiWgCARhq9xa6BBQfp.plDt716UtUzJzEBPNk3mfRa6waQA9wa",
           }
         });
         res.redirect(redirectUrl);
