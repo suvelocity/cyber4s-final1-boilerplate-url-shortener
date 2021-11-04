@@ -9,6 +9,7 @@ class DataBase {
                 return(err);
            }
            const fileContent = JSON.parse(data);
+           if(fileContent[shortUrl]){ return "Path taken" }
            fileContent[shortUrl] = {longUrl: longUrl , date: new Date().toISOString().slice(0, 10).replace('T', ' '), counter: 0};      
            fs.writeFile("./DB.json", JSON.stringify(fileContent), 'utf8', (err)=>{})
        }) 
@@ -39,6 +40,28 @@ class DataBase {
         const fileContent = JSON.parse(data);
         return fileContent[shortUrl].counter;   
     }
+
+    isDuplicate(shortUrl){
+        const data = fs.readFileSync('./DB.json');;
+        const fileContent = JSON.parse(data);
+        if(fileContent[shortUrl]){
+            return true;
+        }
+        return false;
+    }
+
+   isExistLong(longUrl){
+        const data = fs.readFileSync('./DB.json');;
+        const fileContent = JSON.parse(data);
+        for (let shortUrl in fileContent){
+            if(fileContent[shortUrl].longUrl == longUrl){
+                return shortUrl;
+            }
+        }
+        return false;
+    }
+
+
 
 }
 

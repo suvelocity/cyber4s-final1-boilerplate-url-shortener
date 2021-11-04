@@ -31,11 +31,29 @@ app.get("/", (req,res)=>{              //homepage
 
 app.get("/makeurl", function(req,res){
   try {
-    const longURL = req.headers.longurl;
+    const longUrl = JSON.stringify(req.headers.longurl);
+    const customShort = req.headers.shorturl;
+    if(!customShort == undefined){
+      console.log('why am i here');
+      if(dataBaseUse.isDuplicate(customShort)){
+        throw "url taken already"
+      }
+      else{
+        dataBaseUse.storeUrlRelation(longUrl, customShort);
+        res.send(homeUrl + "/" + customShort)
+      }
+    }
+    
+    if(dataBaseUse.isExistLong(longUrl)){
+      const existingUrl = dataBaseUse.isExistLong(longUrl)
+      console.log(homeUrl + "/" + existingUrl);
+      res.send(homeUrl + "/" + existingUrl);
+    }
+    else{
     const shortURL = makeId(4);
     dataBaseUse.storeUrlRelation(longURL, shortURL);
     res.send(myURL + "/" + shortURL);
-
+    }
   } catch (error) {
     res.send(error)
   }

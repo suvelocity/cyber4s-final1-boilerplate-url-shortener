@@ -8,17 +8,19 @@ const myAPI = "http://localhost:8080"
 
 button.addEventListener("click", async function(){
     try {
+        const shotUrl = undefined;
         if(!validator.isURL(URLInput.value)){
             displayUrl("Please enter a valid URL");
             return
         }
         const data = await axios.get(`${myAPI}/makeurl`, {
             headers: {
-                "longurl" : URLInput.value 
+                "longurl" : URLInput.value,
+                "shorturl": shotUrl  
             }
         })
         console.log(data);
-        displayUrl(data.data)
+        displayUrl(data.data);
 
     } catch (error) {
         console.log(error);
