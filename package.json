@@ -10,7 +10,16 @@
     "buildFront:dev": "webpack --mode=development",
     "watchFront": "webpack --watch",
     "serveFront": "webpack serve"
+  },"repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimpleLogic420/cyber4s-final1-boilerplate-url-shortener"
   },
+  "keywords": [],
+  "author": "nadav_vol <simplelogic420@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/SimpleLogic420/cyber4s-final1-boilerplate-url-shortener/issues"
+  },
+  "homepage": "https://github.com/SimpleLogic420/cyber4s-final1-boilerplate-url-shortener#readme",
   "dependencies": {
     "@babel/runtime": "^7.16.0",
     "axios": "^0.24.0",
@@ -40,7 +49,7 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.4.0"
   },
-  "license": "MIT",
+  "license": "ISC",
   "devDependencies": {
     
   }
