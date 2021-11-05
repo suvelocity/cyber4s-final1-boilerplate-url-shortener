@@ -1,0 +1,395 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Teko:wght@300&family=Ubuntu:ital,wght@0,500;1,400&display=swap");
+#wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+h3 {
+  font-family: "Ubuntu", sans-serif;
+}
+h4 {
+  font-family: "Ubuntu", sans-serif;
+}
+#footer {
+  font-family: "Teko", sans-serif;
+  margin: 0 auto;
+  display: inline;
+  // margin-top: 5vh;
+  position: static;
+}
+#urlInput {
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  border: 0.5px grey solid;
+  transform: scale(1.5);
+  width: 50%;
+  margin: auto;
+  font-family: "Dosis", sans-serif;
+  display: inline;
+}
+#proInput {
+  display: none;
+  width: 20%;
+  margin: 2vh auto 0 auto;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  border: 0.5px grey solid;
+  font-family: "Dosis", sans-serif;
+}
+#resultUrl {
+  margin-top: 6vh;
+  font-family: "Ubuntu", sans-serif;
+  padding-top: 10vh;
+}
+#goproBtn {
+  border-radius: 5px;
+  width: 8%;
+  margin-top: 10vh;
+}
+.errors {
+  color: #ff3838;
+  font-family: "Dosis", sans-serif;
+  font-size: 20px;
+}
+
+// link style
+a:link {
+  color: #f56fad;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: #f56fad;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: cornflowerblue;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.statsBtn {
+  font-weight: 600;
+  font-size: 12px;
+  transform: scale(0.7);
+  padding-top: 3vh;
+  // font-family: "Ubuntu", sans-serif;
+}
+$brown: #2b2520;
+$green: #39dbc2;
+$pink: #f41fbf;
+$yellow: #ffed28;
+$purple: #b028ff;
+$blue: #49a7ff;
+$red: #ff3838;
+$orange: #db7953;
+// Font
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+// Size
+$extra-large: 110px;
+$large: 50px;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body {
+  @include center;
+}
+.container {
+  * {
+    margin: 20px 0;
+  }
+  .neon-text {
+    $random-text: "Sexy Url shortner";
+    position: relative;
+    $stroke-width: $large * 0.01;
+    font-family: "Pacifico", cursive;
+    text-transform: uppercase;
+    font-size: $large;
+    color: lighten($pink, 25%);
+    -webkit-text-stroke-width: $stroke-width;
+    -webkit-text-stroke-color: lighten($pink, 5%);
+    @include center;
+    text-shadow: 0 0 40px lighten($pink, 5%), 0 0 40px lighten($pink, 5%),
+      0 0 40px lighten($pink, 5%);
+    &:after {
+      content: $random-text;
+      z-index: -1;
+      position: absolute;
+      color: transparent;
+      -webkit-text-stroke-width: $stroke-width;
+      -webkit-text-stroke-color: darken($pink, 80%);
+      top: 1%;
+      // left: 0.5px;
+    }
+  }
+}
+// button section
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
+.button_container {
+  margin-top: 7vh;
+  position: flex;
+  left: 0;
+  right: 0;
+  top: 50vh;
+}
+.btn {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.btn span {
+  position: relative;
+  z-index: 1;
+}
+.btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: $pink;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+.btn:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+//background section
+// background
+
+@import url(https://fonts.googleapis.com/css?family=Exo:100);
+
+$bg-url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC";
+$bg-width: 50px;
+$bg-height: 50px;
+/* Animations */
+@-webkit-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-moz-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-o-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@keyframes bg-scrolling-reverse {
+  100% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-webkit-keyframes bg-scrolling {
+  0% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-moz-keyframes bg-scrolling {
+  0% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-o-keyframes bg-scrolling {
+  0% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@keyframes bg-scrolling {
+  0% {
+    background-position: $bg-width $bg-height;
+  }
+}
+/* Main styles */
+body {
+  margin-top: 3.5vh;
+  color: #999;
+  text-align: center;
+  /* img size is 50x50 */
+  background: url($bg-url) repeat 0 0;
+  -webkit-animation: bg-scrolling-reverse 0.92s infinite; /* Safari 4+ */
+  -moz-animation: bg-scrolling-reverse 0.92s infinite; /* Fx 5+ */
+  -o-animation: bg-scrolling-reverse 0.92s infinite; /* Opera 12+ */
+  animation: bg-scrolling-reverse 0.92s infinite; /* IE 10+ */
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+  &::before {
+    font-size: 8rem;
+    font-weight: 100;
+    font-style: normal;
+  }
+}
+
+// modal style
+.modal {
+  background: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0 10px 20px rgba(black, 0.2);
+  left: 50%;
+  max-width: 90%;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30em;
+  text-align: left;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Dosis", sans-serif;
+}
+
+.modal .details-modal-title {
+  color: #111827;
+  padding: 1.5em 2em;
+  pointer-events: all;
+  position: relative;
+  width: calc(100% - 4.5em);
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: normal;
+  }
+}
+
+.details-modal-content {
+  border-top: 5px solid #e0e0e0;
+  padding: 2em;
+  pointer-events: all;
+  overflow: auto;
+}
+
+#closeStatInfo {
+  text-align: center;
+  position: relative;
+  font-size: 110%;
+  left: 115%;
+  color: darkred;
+  transition: 30s;
+  display: block;
+  width: 3vw;
+  height: 3vh;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.4s;
+}
+#closeStatInfo:hover {
+  color: green;
+  text-shadow: indigo 5px 10px 15px;
+}
+
+// gopro btn
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.button {
+  border: 2px solid #ff94f1;
+  transform: scale(0.5);
+  height: 80px;
+  width: 200px;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  margin: 25px;
+
+  &::after {
+    content: "Go Pro";
+    font-size: 26px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%);
+    color: #ff94f1;
+    transition: all 0.1s linear;
+  }
+
+  &::before {
+    content: "";
+    position: relative;
+    display: block;
+    height: 15px;
+    width: 15px;
+    background: #ff94f1;
+    box-shadow: 0px 0px 10px 3px rgb(12, 46, 46);
+    margin-left: -8px;
+    margin-top: -8px;
+    opacity: 0;
+    transition: all 0.1s linear;
+    border-radius: 100%;
+    animation: star 1.3s linear infinite;
+  }
+
+  @keyframes star {
+    0% {
+      margin-left: -8px;
+      margin-top: -8px;
+    }
+    25% {
+      margin-left: 194px;
+      margin-top: -8px;
+    }
+
+    50% {
+      margin-left: 194px;
+      margin-top: 75px;
+    }
+    75% {
+      margin-left: -8px;
+      margin-top: 75px;
+    }
+    100% {
+      margin-left: -8px;
+      margin-top: -8px;
+    }
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+      animation: star 1.3s linear infinite;
+    }
+
+    &::after {
+      text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 20px #82bedc,
+        0 0 30px #82bedc, 0 0 40px #82bedc, 0 0 50px #82bedc, 0 0 60px #82bedc;
+    }
+  }
+}
