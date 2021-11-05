@@ -1,5 +1,3 @@
-require('dotenv').config({ path: __dirname + '/../../.env' });
-const path = require("path")
 const express = require("express");
 const validator = require('validator');
 const axios = require('axios');
@@ -8,16 +6,24 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use("/", (req, res, next) => {
+  console.log("hello");
+  console.log(req.headers['user-agent']);
+  next();
+})
 
 app.use(express.static(`${__dirname}/../../Assest`));
 app.use("/error/404", express.static(`${__dirname}/../Frontend`, { index: 'notfound.html' }));
+app.use("/Mobile", express.static(`${__dirname}/../Frontend`, { index: 'MoblieIndex.html' }));
 app.use("/", express.static(`${__dirname}/../Frontend`));
-
 app.get("/", (req, res) => {
   res.sendFile(`${__dirname}/../Frontend/index.html`);
 });
 app.get("/error/404", (req, res) => {
   res.sendFile(`${__dirname}/../Frontend/Frontend/notfound.html`);
+});
+app.get("/Mobile", (req, res) => {
+  res.sendFile(`${__dirname}/../Frontend/Frontend/MoblieIndex.html`);
 });
 
 
@@ -114,7 +120,6 @@ app.get("/:wishUrl", async (req, res, next) => {
     res.redirect('/error/404');
     return
   } catch (err) {
-    console.log(err);
     res.redirect('/error/404');
     return
   }
