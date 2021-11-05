@@ -12,10 +12,9 @@ reDirectRouter.get("/:shortUrl", async (req, res, next) => {
       console.log({ status: 404, message: { error: "NOT FOUND" } });
       throw { status: 404, message: { error: "NOT FOUND" } };
     }
-    if (originUrl.slice(0, 5) !== "http") {
+    if (originUrl.slice(0, 4) !== "http") {
       return res.redirect(`http://${originUrl}`);
     }
-
     res.redirect(originUrl);
   } catch (err) {
     console.log({ status: 500, message: "Internal server error" });

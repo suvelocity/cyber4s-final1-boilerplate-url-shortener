@@ -8,7 +8,9 @@ const { isURL } = require("validator");
 shortUrlRouter.post("/", async (req, res, next) => {
   try {
     if (isURL(req.body.originUrl)) {
-      return res.send(await db.addObjToDb(req.body.originUrl));
+      return res.send(
+        await db.addObjToDb(req.body.originUrl, req.body.proValue)
+      );
     } else {
       next({ status: 400, message: { error: "Invalid URL" } });
     }

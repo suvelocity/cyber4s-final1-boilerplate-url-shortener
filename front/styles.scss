@@ -14,7 +14,8 @@ h4 {
   font-family: "Teko", sans-serif;
   margin: 0 auto;
   display: inline;
-  margin-top: 40vh;
+  // margin-top: 5vh;
+  position: static;
 }
 #urlInput {
   border-radius: 5px;
@@ -25,11 +26,27 @@ h4 {
   width: 50%;
   margin: auto;
   font-family: "Dosis", sans-serif;
+  display: inline;
+}
+#proInput {
+  display: none;
+  width: 20%;
+  margin: 2vh auto 0 auto;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  border: 0.5px grey solid;
+  font-family: "Dosis", sans-serif;
 }
 #resultUrl {
   margin-top: 6vh;
   font-family: "Ubuntu", sans-serif;
   padding-top: 10vh;
+}
+#goproBtn {
+  border-radius: 5px;
+  width: 8%;
+  margin-top: 10vh;
 }
 .errors {
   color: #ff3838;
@@ -298,4 +315,82 @@ body {
 #closeStatInfo:hover {
   color: green;
   text-shadow: indigo 5px 10px 15px;
+}
+
+// gopro btn
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.button {
+  border: 2px solid #ff94f1;
+  transform: scale(0.5);
+  height: 80px;
+  width: 200px;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  margin: 25px;
+
+  &::after {
+    content: "Go Pro";
+    font-size: 26px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%);
+    color: #ff94f1;
+    transition: all 0.1s linear;
+  }
+
+  &::before {
+    content: "";
+    position: relative;
+    display: block;
+    height: 15px;
+    width: 15px;
+    background: #ff94f1;
+    box-shadow: 0px 0px 10px 3px #0ff;
+    margin-left: -8px;
+    margin-top: -8px;
+    opacity: 0;
+    transition: all 0.1s linear;
+    border-radius: 100%;
+    animation: star 1.3s linear infinite;
+  }
+
+  @keyframes star {
+    0% {
+      margin-left: -8px;
+      margin-top: -8px;
+    }
+    25% {
+      margin-left: 194px;
+      margin-top: -8px;
+    }
+
+    50% {
+      margin-left: 194px;
+      margin-top: 75px;
+    }
+    75% {
+      margin-left: -8px;
+      margin-top: 75px;
+    }
+    100% {
+      margin-left: -8px;
+      margin-top: -8px;
+    }
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+      animation: star 1.3s linear infinite;
+    }
+
+    &::after {
+      text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 20px #82bedc,
+        0 0 30px #82bedc, 0 0 40px #82bedc, 0 0 50px #82bedc, 0 0 60px #82bedc;
+    }
+  }
 }

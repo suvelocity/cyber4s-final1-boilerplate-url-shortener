@@ -23,15 +23,15 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
   return el;
 }
 
-async function getShortenUrl(originUrl) {
+async function getShortenUrl(originUrl, proValue) {
   try {
-    const body = { originUrl: `${originUrl}` };
+    const body = { originUrl: `${originUrl}`, proValue: `${proValue}` };
     const response = await axios.post(`${baseServerPath}/api/shorturl`, body, {
       headers: {
         "content-type": "application/json",
       },
     });
-    console.log(`${baseServerPath}/api/shorturl`);
+    // console.log(`${baseServerPath}/api/shorturl`);
     return response;
   } catch (err) {
     clearResultDiv();
@@ -73,7 +73,8 @@ document
 
 async function serveUrl() {
   const inputValue = document.getElementById("urlInput").value;
-  const newSequence = await getShortenUrl(inputValue);
+  const proValue = document.getElementById("proInput").value;
+  const newSequence = await getShortenUrl(inputValue, proValue);
   const result = document.getElementById("resultUrl");
   clearResultDiv();
   createResultDiv(result, newSequence.data);
@@ -123,3 +124,10 @@ function closeStatsInfo() {
   modal.style.display = "none";
   document.getElementById("wrapper").style.display = "flex";
 }
+
+// go pro function
+const proBtn = document.getElementById("proBtn");
+proBtn.addEventListener("click", () => {
+  const proinput = document.getElementById("proInput");
+  proinput.style.display = "flex";
+});

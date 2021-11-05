@@ -5,17 +5,21 @@ const util = require("util");
 const moment = require("moment");
 const readFile = (filename) => util.promisify(fs.readFile)(filename, "utf-8");
 class DataBase {
-  static #createShortCut() {
+  static #createShortCut(proValue) {
     //function that generates a unique random sequnce
-    let shortUrl = "";
-    for (let i = 0; i < 7; i++) {
-      if (Math.random() < 0.5) {
-        shortUrl += String.fromCharCode(65 + Math.floor(Math.random() * 26));
-      } else {
-        shortUrl += String.fromCharCode(48 + Math.floor(Math.random() * 10));
+    if (proValue) {
+      return proValue;
+    } else {
+      let shortUrl = "";
+      for (let i = 0; i < 7; i++) {
+        if (Math.random() < 0.5) {
+          shortUrl += String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        } else {
+          shortUrl += String.fromCharCode(48 + Math.floor(Math.random() * 10));
+        }
       }
+      return shortUrl;
     }
-    return shortUrl;
   }
   static async #readDataBase() {
     //function that reads the database
@@ -26,10 +30,10 @@ class DataBase {
       throw error;
     }
   }
-  static async #createUrlObj(_originUrl) {
+  static async #createUrlObj(_originUrl, proValue) {
     //function that creates an url object
     try {
-      let newShortCut = await this.#createShortCut();
+      let newShortCut = await this.#createShortCut(proValue);
       while (await this.#checkIfUrlExist(newShortCut)) {
         newShortCut = await this.#createShortCut();
       }
@@ -45,13 +49,15 @@ class DataBase {
     }
   }
 
-  static async addObjToDb(originUrl) {
+  static async addObjToDb(originUrl, proValue) {
     // function that adds the new object we generated to the database
     try {
       if (await this.#isShortenExist(originUrl)) {
         return await this.#getShortUrl(originUrl);
       }
-      return await this.#writeUrl(await this.#createUrlObj(originUrl));
+      return await this.#writeUrl(
+        await this.#createUrlObj(originUrl, proValue)
+      );
     } catch (error) {
       throw error;
     }
@@ -115,7 +121,7 @@ class DataBase {
     }
   }
   static async getOriginUrl(_shortUrl) {
-    // functions that gets a shorturl and returns originalurl
+    // function that gets a shorturl and returns originalurl
     try {
       let dataBase = await this.#readDataBase();
       dataBase = JSON.parse(dataBase);
