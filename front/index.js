@@ -3,7 +3,7 @@ import "./styles.scss";
 import axios from "axios";
 //DOM elements section
 
-const baseServerPath = "http://localhost:3000";
+const baseServerPath = "https://sexyurl.herokuapp.com/app";
 
 function createElement(tagName, children = [], classes = [], attributes = {}) {
   // create new element in more comfortable
