@@ -45,6 +45,7 @@ async function getShortenUrl(originUrl, proValue) {
 }
 
 const createResultDiv = (element, newSequence) => {
+  //function that adds content to the result div
   element.appendChild(
     createElement("a", `${baseServerPath}/${newSequence}`, ["shortLink"], {
       href: `/${newSequence}`,
@@ -63,6 +64,7 @@ const createResultDiv = (element, newSequence) => {
 };
 
 function clearResultDiv() {
+  //clears the resultdiv content
   const result = document.getElementById("resultUrl");
   result.textContent = "";
 }
@@ -72,6 +74,7 @@ document
   .addEventListener("click", () => serveUrl());
 
 async function serveUrl() {
+  //gets the url input value and calls other funtions that build the data and the dom
   const inputValue = document.getElementById("urlInput").value;
   const proValue = document.getElementById("proInput").value;
   const newSequence = await getShortenUrl(inputValue, proValue);
@@ -81,6 +84,7 @@ async function serveUrl() {
 }
 
 async function getStats(sequence) {
+  //function that gets the url object to use in handlerstat
   try {
     const stats = await axios.get(`/api/stats/${sequence}`);
 
@@ -93,6 +97,7 @@ async function getStats(sequence) {
 }
 
 async function handlerStat(event) {
+  // function that handle the url stats and appends it to the modal
   let sequence;
   if (event.target.tagName === "SPAN") {
     //fixes a problem that went when we pressed directly on the span
@@ -119,6 +124,7 @@ document
   .addEventListener("click", () => closeStatsInfo()); //event listener to the [X] symbol in the stats modal
 
 function closeStatsInfo() {
+  //function for the close button in the model
   const modal = document.getElementById("modal");
   document.querySelector(".details-modal-content").textContent = "";
   modal.style.display = "none";

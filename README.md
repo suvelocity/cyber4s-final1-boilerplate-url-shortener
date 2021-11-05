@@ -1,103 +1,43 @@
 # ![Scale-Up Velocity](./readme-files/logo-main.png) Final 1 - URL shortner 📎
 
-In this project you will create your own [URL shortener](https://en.wikipedia.org/wiki/URL_shortening)!
+## Sexyurl shortner
 
-This repository includes a basic template for starting the project:
+A url shortner site that can recieve a long and ugly url and attached to it a shorter url that is built from my site url along with a unique id that helps us to redirect to the original url you have chosen to get shorten.
 
-## Instructions
+## extra features
 
-- Fork this repository to your account as a **public** repo
-- Clone your new repository to your computer 🖥
-- Install the project dependencies by running `npm install` from the vscode terminal `ctrl + j` (make sure you are in the correct directory) 📂
-- [Create a new branch](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/managing-branches) for the development process
-- Make changes to the code to meet the project requirements 📝
-- [Commit Early, Push Often](https://www.worklytics.co/commit-early-push-often/) - your work will be evaluated by your git flow and overall github usage 🏄‍♂️
-- Before submitting, create a pull request from the development branch into the main branch. **Leave the PR open and do not merge the branches**. The open PR will be used to review and mark your code
-- Good Luck! 🤘
+I added a "go pro " version , in real working shorturl services you can pay money to have the abbility to chose your own slug . when you press the go pro button and extra input will pop on the screen and you can add you own personal slug , and if its not taken you can have it !
 
-## Testing your project
+## project basic structure
 
-In this assignment, you will have to create your own tests, as learned in class. Your grade will be calculated by your test coverage.
+Project build from back side (server dir) and front side(front dir+dist) , the project was built with webpack .
 
-Optionally, You can create a github [action](https://docs.github.com/en/actions) that runs your tests on each commit:
+## repl.it link
 
-![Commits test](./readme-files/commit-tests.png)
+https://replit.com/@SimpleLogic420/cyber4s-final1-boilerplate-url-shortener#index.js
 
-## Guidelines
-
-- Create a route `/api/shorturl/` in your `express` app that will handle all url shortening requests. (We recommend using [express Router](https://expressjs.com/en/guide/routing.html))
-
-- Write/read **Asynchronously** a single JSON file as your DB
-
-- [Serve](https://expressjs.com/en/starter/static-files.html) your client files from your server at route `/`
-
-- Style and change your front-end as you wish. You can take inspiration from this [example](https://www.shorturl.at/)
-
-## Requirements
-
-- Examine thoroughly and copy all functionality of [this](https://url-shortener-microservice.freecodecamp.rocks/) FCC example
-
-- Use a `class DataBase{}` to read/write (**Asynchronously**) all data in your back-end (you can use a json file as persistent layer)
-
-- Add another functionality to your service: a statistics route (`api/statistic/:shorturl-id`) that will respond with the following data per `shorturl-id`:
-
-  - `creationDate` - a SQLDate format
-  - `redirectCount` - the amount of times this url was used for redirection
-  - `originalUrl`
-  - `shorturl-id`
-
-- Fully test your `express` app with `jest` and `supertest`. Test each end point response **including** error responses.
-
-  Use a separate DB file for your tests. _Hint: use [Environment variables](https://jestjs.io/docs/en/environment-variables)_
-
-## Bonus
-
-- Add any feature you desire. Some ideas worth extra points:
-  - Custom short URL. Support optional `shorturl-id` parameter in your `POST` request. Pay attention to error handling.
-  - Serve a styled statistics dashboard instead of the default JSON statistics
-  - Use the [`JSONBIN.io`](https://jsonbin.io/) service bin as your persistent layer in your back-end DB class (use CRUD operations to read write bins)
-  - Try implementing user management
-- Use supertest/puppeteer test to test any bonus feature you implemented
-
-**Add an explanation in `README.md` for each bonus feature you add and a link to any resource you used**
-
-## Grading policy
-
-- Using jsonbin.io with/instead of writing to files
-- Correct DB class usage
-- Code quality and style: indentation, Meaningful and non-disambiguate variable names, Comments and documentation, file and directory structure
-- Visual creativity, style your front-end to make it look awesome 💅🏿
-- Division to reusable functions, no code duplication
-- Git usage: meaningful commit messages, small commits, folder and file structures, README file, issues, etc...
-
-## Submitting
-
-- Submit your solution repo link - an open PR from your dev branch to the main one
-- Your readme should have a [`repl.it`](https://repl.it/) link with your solutions.
-- Submit a link to your repo to the CRM.
-
-GOOD LUCK!
+HAVE FUN!
 
 ### Misc
 
-- [ ] **Add workflow scripts**
+- [x] **Add workflow scripts**
   - [x] build - webpack build ./web into ./public folder
-  - [ ] dev - start a nodemon server && start webpack dev server
-  - [ ] deploy to heroku
+  - [x] dev - start a nodemon server && start webpack dev server
+  - [x] deploy to heroku
 
 ### Front
 
-- [ ] **make better design**
+- [x] **make better design**
 - [x] **home page** - /app
   - [x] url shorten input -> POST /api/shrten/ { url: <input url> }
   - [x] bootstrap sexy design
   - [x] nice error display
-- [ ] **stats page** /app/<UID>
-  - [ ] requests the stats from -> GET /api/stats/<UID>
-  - [ ] error display
-  - [ ] add dashboard with stats display:
-    - [ ] locations of requests
-    - [ ] unique requesters
+- [x] **stats page** /app/<UID>
+  - [x] requests the stats from -> GET /api/stats/<UID>
+  - [x] error display
+  - [x] add dashboard with stats display:
+    - [x] locations of requests
+    - [x] unique requesters
     - [ ] usage graph
 
 ### Back
@@ -109,9 +49,9 @@ GOOD LUCK!
   - [x] check if uid is realy unique
 - [x] GET /<UID>
   - [x] store user req data
-  - [] redirect to the URL
-- [] GET /app
-  - [] serve the static from ./public folder
+  - [x] redirect to the URL
+- [x] GET /app
+  - [x] serve the static from ./public folder
 - [x] GET /api/stats/<UID>
   - [x] respond with JSON of the stats
 - [x] **refactoring**
