@@ -60,9 +60,6 @@ class DataBase {
         }
         return false;
     }
-
-
-
 }
 
 module.exports = DataBase;

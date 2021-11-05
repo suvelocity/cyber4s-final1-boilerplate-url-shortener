@@ -67,7 +67,7 @@ app.get("/status", function (req,res){
         const data = {counter, longurl, date};
         res.send(data);
     } catch (error) {
-      
+      res.send(error)
     }
 })
 
