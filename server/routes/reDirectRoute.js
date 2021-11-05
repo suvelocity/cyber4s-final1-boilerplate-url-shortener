@@ -5,6 +5,9 @@ const fs = require("fs");
 const path = require("path");
 const db = require("../models/dataBase.js");
 
+reDirectRouter.get("/", (req, res, next) => {
+  return res.redirect(`/app/`);
+});
 reDirectRouter.get("/:shortUrl", async (req, res, next) => {
   try {
     const originUrl = await db.getOriginUrl(req.params.shortUrl);
