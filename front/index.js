@@ -26,7 +26,7 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 async function getShortenUrl(originUrl, proValue) {
   try {
     const body = { originUrl: `${originUrl}`, proValue: `${proValue}` };
-    const response = await axios.post(`${baseServerPath}/api/shorturl`, body, {
+    const response = await axios.post(`/api/shorturl`, body, {
       headers: {
         "content-type": "application/json",
       },
@@ -47,7 +47,7 @@ async function getShortenUrl(originUrl, proValue) {
 const createResultDiv = (element, newSequence) => {
   element.appendChild(
     createElement("a", `${baseServerPath}/${newSequence}`, ["shortLink"], {
-      href: `${baseServerPath}/${newSequence}`,
+      href: `/${newSequence}`,
     })
   );
   element.appendChild(
@@ -82,7 +82,7 @@ async function serveUrl() {
 
 async function getStats(sequence) {
   try {
-    const stats = await axios.get(`${baseServerPath}/api/stats/${sequence}`);
+    const stats = await axios.get(`/api/stats/${sequence}`);
 
     return stats;
   } catch (err) {
