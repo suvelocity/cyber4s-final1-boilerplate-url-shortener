@@ -27,10 +27,6 @@ app.use("/", (req,res, next)=>{
   }
 })
 
-// app.get("/", (req,res)=>{              //homepage                             
-//   res.sendFile("dist/index.html");
-// })
-
 app.get("/makeurl", function(req,res){
   try {
     const longUrl = JSON.stringify(req.headers.longurl);
@@ -64,7 +60,7 @@ app.get("/makeurl", function(req,res){
 app.get("/status", function (req,res){
     try {
         const shortURL = req.headers.shorturl;
-        const slicedUrl = (shortURL.slice(22));
+        const slicedUrl = (shortURL.slice(27));
         const counter = dataBaseUse.getCounterFromStorage(slicedUrl);
         const longurl =dataBaseUse.getLongUrlFromStorage(`/${slicedUrl}`);
         const date =dataBaseUse.getDateFromStorage(slicedUrl);
