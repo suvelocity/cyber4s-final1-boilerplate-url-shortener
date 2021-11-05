@@ -6,7 +6,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use("/", (req, res, next) => {
+app.use("/", (req, res) => {
   const toMatch = [
     /Android/i,
     /webOS/i,
@@ -21,7 +21,6 @@ app.use("/", (req, res, next) => {
       res.redirect("/Mobile")
     }
   }
-  next();
 })
 
 app.use(express.static(`${__dirname}/../../Assest`));
