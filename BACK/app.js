@@ -15,10 +15,13 @@ app.use("/", (req,res, next)=>{
   ){next()}
   else{
     try {
+      console.log("in try");
       const requestEnd = (req. _parsedOriginalUrl.path);
       const longURL = dataBaseUse.getLongUrlFromStorage(requestEnd);
+      console.log("longURL", longURL);
       res.redirect(longURL.slice(1,longURL.length-1));
     } catch (error) {
+      console.log(error);
       res.send(error);
     }
   }
