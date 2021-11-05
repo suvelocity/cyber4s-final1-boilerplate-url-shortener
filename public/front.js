@@ -6,7 +6,6 @@ const baseURL = 'http://localhost:8080';
 async function submitUrl(){
     const urlInput = document.querySelector('#input_url').value;
     // try for invalid url
-    // const response = await axios.post(`${baseURL}/shorten/${urlInput}`);
     const response = await axios.post(`${baseURL}/shorten`, {
         url: urlInput
     });

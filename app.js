@@ -10,10 +10,8 @@ setRouterDB(linksDb);
 
 app.use(cors());
 app.use(express.json());
-// app.use("/public", express.static(`./public`));
-// app.get("/", (req, res) => {
-//   res.sendFile(__dirname + "/views/index.html");
-// });
+app.use("/public", express.static(`./public`));
+
 app.use('/', shortLinkRouter);
 
 app.use(errorHandler)

@@ -1,4 +1,5 @@
 function errorHandler(err, req, res, next){
+    console.log(err);
     if(!err) return
     switch (err) {
         case '404':
