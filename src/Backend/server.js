@@ -6,7 +6,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use("/", (req, res) => {
+app.use("/", (req, res, next) => {
   if (req.url != "/Mobile") {
     const toMatch = [
       /Android/i,
@@ -19,9 +19,12 @@ app.use("/", (req, res) => {
     ];
     for (let device of toMatch) {
       if (device.test(req.headers['user-agent'])) {
-        res.redirect("/Mobile")
+        res.redirect("/Mobile");
+        return;
       }
     }
+  } else {
+    next();
   }
 })
 
