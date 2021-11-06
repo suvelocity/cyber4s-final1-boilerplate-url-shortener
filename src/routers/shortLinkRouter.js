@@ -26,9 +26,10 @@ router.post('/shorten', (req, res) => {
 
 router.get('/:shortURL', (req, res, next) => {
     const shortURL = req.params.shortURL;
-    const longURL = linksDb.getValue(shortURL).longURL;
-    if(!longURL) next('404');
+    const shortURLData = linksDb.getValue(shortURL);
+    if(!shortURLData) next('404');
     else{
+        const longURL = shortURLData.longURL;
         linksDb.store(shortURL, { longURL, timesClicked: linksDb.getValue(shortURL).timesClicked + 1});
         res.redirect(longURL);
         // res.send();
