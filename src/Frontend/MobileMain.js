@@ -1,7 +1,7 @@
 'use strict'
 const Host = `https://egshorturl.herokuapp.com`;
 
-const sendOldURLToServerWithNameOfNew = async () => {
+const sendServerUrlsParams = async () => {
   const oldURLvalue = document.getElementById("oldURLinput").value;
   const newURLvalue = document.getElementById("newURLinput").value;
   if (!validator.isURL(oldURLvalue)) {
@@ -76,5 +76,5 @@ const createErrorInputUI = (inputElement, msg) => {
   inputElement.parentElement.appendChild(msgPara)
 }
 
-document.getElementById("createURLBtn").addEventListener("click", sendOldURLToServerWithNameOfNew);
+document.getElementById("createURLBtn").addEventListener("click", sendServerUrlsParams);
 document.getElementById("getStatsticBtn").addEventListener("click", getStatisticFromURL);

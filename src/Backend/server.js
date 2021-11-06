@@ -1,13 +1,17 @@
+// NPM Libaries
 const express = require("express");
 const validator = require('validator');
 const axios = require('axios');
-const app = express();
 const cors = require("cors");
+
+const app = express();
+
 app.use(cors());
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 app.use("/", (req, res, next) => {
-  if (req.url == "/") {
+  if (req.url == "/") { // Mobile Check
     const toMatch = [
       /Android/i,
       /webOS/i,
@@ -48,19 +52,19 @@ app.get("/Mobile", (req, res) => {
 app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
   const oldURL = req.body.oldurl;
   const newUrl = req.params.nameOfNewUrl;
-  if (!validator.isURL(oldURL)) {
-    next({ status: 401, msg: "Go Away" })
+  if (!validator.isURL(oldURL)) { // Double Check Arguments
+    next({ status: 401, msg: "Go Away" });
     return
   }
   if (!validator.isLength(newUrl, { min: 3, max: 15 })) {
-    next({ status: 401, msg: "Go Away" })
+    next({ status: 401, msg: "Go Away" });
     return
   }
   if (!validator.isAlphanumeric(newUrl)) {
-    next({ status: 401, msg: "Go Away" })
+    next({ status: 401, msg: "Go Away" });
     return
   }
-  const today = new Date()
+  const today = new Date();
   const UrlObj = {
     creationDate: today.toISOString().substring(0, 10),
     redirectCount: 1,
@@ -74,6 +78,12 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
       }
     });
     const EGShortURLOBJ = getResponse.data.record;
+    for (let key in EGShortURLOBJ) {
+      if (key == newUrl) {
+        next({ status: 401, msg: "New URL Taken" })
+        return;
+      }
+    }
     EGShortURLOBJ[newUrl] = UrlObj;
     const putResponse = await axios.put(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, JSON.stringify(EGShortURLOBJ), {
       headers: {
@@ -81,7 +91,7 @@ app.post("/api/shorturl/:nameOfNewUrl", async (req, res, next) => {
         "X-Master-Key": process.env.API_SECRET_KEY,
       }
     });
-    res.send(`${newUrl}`);
+    res.send(`${newUrl}`); // To Show In Frontend
   } catch (err) {
     next(err)
   }
@@ -125,6 +135,7 @@ app.get("/:wishUrl", async (req, res, next) => {
       if (value == givenUrl) {
         const redirectUrl = EGShortURLOBJ[value].originalUrl;
         EGShortURLOBJ[value].redirectCount++;
+        // async because its only counter and user not rely on response
         const putResponse = axios.put(`https://api.jsonbin.io/v3/b/6183b2f09548541c29cd8045`, JSON.stringify(EGShortURLOBJ), {
           headers: {
             "Content-Type": "application/json",
@@ -141,10 +152,11 @@ app.get("/:wishUrl", async (req, res, next) => {
     res.redirect('/error/404');
     return
   }
-})
+});
 
+// Error Handler
 app.use((err, req, res, next) => {
-  console.log(err);
+  console.log(err); // for logs
   if (err.status) {
     res.statusMessage = err.msg
     res.status(err.status).send({
