@@ -24,6 +24,7 @@ app.use("/", (req, res, next) => {
       }
     }
   } else {
+    console.log("here in else");
     next();
   }
 })
