@@ -1,7 +1,7 @@
 const urlInputField = document.querySelector('#input_url');
 const urlSubmit = document.querySelector('#submit_url');
 urlSubmit.addEventListener('click', submitUrl);
-const baseURL = 'http://localhost:8080';
+const baseURL = 'https://my-shortify.herokuapp.com';
 
 async function submitUrl(){
     const urlInput = document.querySelector('#input_url').value;
