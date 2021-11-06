@@ -4,7 +4,7 @@ const router  = express.Router();
 const { nanoid } = require("nanoid");
 const path = require('path');
 
-const baseURL = 'http://localhost:8080/';
+const baseURL = 'https://my-shortify.herokuapp.com/';
 let linksDb;
 
 function setRouterDB(db){
