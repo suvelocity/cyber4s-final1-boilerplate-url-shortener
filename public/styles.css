@@ -1,0 +1,56 @@
+.parent {
+    margin: auto;
+    height: 70vh;
+    width: 100vw;
+    background-color: #EAEAD2;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+}
+
+.div1 {
+    background-color: #EAEAD2;
+    grid-area: 2 / 2 / 10 / 10;
+}
+#intro_field {
+    grid-area: 2 / 2 / 5 / 10;
+}
+#input_field {
+    grid-area: 5 / 2 / 7 / 8;
+}
+#submit_field {
+    grid-area: 5 / 8 / 7 / 10;
+}
+#result_field {
+    grid-area: 7 / 2 / 10 / 10;
+}
+
+.shorten_fields {
+    background-color: #B4420E;
+    border: black 1px solid;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shorten_fields > * {
+    width: 80%;
+    height: 80%;
+    font-size: 150%;
+    color: white;
+}
+
+#submit_url {
+    background-color: #0B1983;
+}
+
+#page_title {
+    text-align: center;
+}
+
+#input_url {
+    color: black;
+}

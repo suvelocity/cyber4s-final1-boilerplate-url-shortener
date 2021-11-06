@@ -10,7 +10,10 @@ async function submitUrl(){
         url: urlInput
     });
     urlInputField.value = "";
+    document.querySelector('#result_field').style = "visibility: visible";
     const shortLinkField = document.querySelector('#short_link')
     shortLinkField.innerText = response.data;
     shortLinkField.setAttribute('href', response.data);
 }
+
+document.body.style.backgroundColor = '#EAEAD2';

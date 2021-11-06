@@ -5,19 +5,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
+    <title>Shortify</title>
     <link rel="icon" type="image/png" href="../public/favicon.ico" />
     <!--<link href="./public/style.css" rel="stylesheet" type="text/css" />-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/public/styles.css" rel="stylesheet" type="text/css">
     <script src="/public/front.js" defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
   </head>
 
   <body>
-    <h1>URL Shortener</h1>
-    <input id="input_url" placeholder="Shorten your link">
-    <button id="submit_url">Shorten</button>
-    <div id="result">Result:
-      <a id="short_link"></a>
+
+    <h1 id="page_title">Shortify</h1>
+
+    <div class="parent">
+      <div class="div1"></div>
+      <div id="intro_field" class="shorten_fields">
+        <p>Welcome to Shortify! Paste your link down below and we will <br> generate a short link for you:</p>
+      </div>
+      <div id="input_field" class="shorten_fields">
+        <input id="input_url" placeholder="Shorten your link" type="text">
+      </div>
+      <div id="submit_field" class="shorten_fields">
+        <button id="submit_url" type="button" class="btn btn-warning">Shorten</button>
+      </div>
+      <div id="result_field" class="shorten_fields" style="visibility: hidden">
+        <div>Your short link: <br><a id="short_link" ></a></div>
+        <!-- <a id="short_link" ></a> -->
+      </div>
     </div>
+
   </body>
 </html>
