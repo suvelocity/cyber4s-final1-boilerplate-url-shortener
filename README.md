@@ -1,4 +1,4 @@
-# ![EGShortUrl](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/Logo.svg?raw=true "Title") Final 1 - URL shortner 📎
+# ![EGShortUrl](/Reademe-Assest/Logo.svg?raw=true) Final 1 - URL shortner 📎
 
 Hello everybody, in this project i created a shoertner for Long URL, with use of mant technologies and functionallity.
 this website sit in Heroku servers, use JSONBINS as Databse and use Nodejs As runtime environment.
@@ -41,5 +41,7 @@ so in last, i didnt use class who give me something new and i can do better with
 
 ## Technologies in EG-Short-URL :
 
-![HtmlLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/HTMLLOGO.svg) ![CssLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/CSSLOGO.svg) ![JsLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/JSLOGO.svg)
-![AxiosLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/AXIOSLOGO.svg) ![NodeLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/NODEJSLOGO.svg) ![HerokuLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/HEROKULOGO.svg)
+![HtmlLogo](/Reademe-Assest/HTMLLOGO.svg?raw=true) ![CssLogo](/Reademe-Assest/CSSLOGO.svg?raw=true) ![JsLogo](/Reademe-Assest/JSLOGO.svg?raw=true)
+![AxiosLogo](/Reademe-Assest/AXIOSLOGO.svg?raw=true) ![NodeLogo](/Reademe-Assest/NODEJSLOGO.svg?raw=true) ![HerokuLogo](/Reademe-Assest/HEROKULOGO.svg?raw=true)
+
+### Thank You 4 Review my Website
