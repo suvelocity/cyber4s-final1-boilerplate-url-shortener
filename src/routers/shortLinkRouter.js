@@ -19,17 +19,18 @@ router.post('/shorten', (req, res) => {
         shortURLKey = nanoid(6);
     }
     const longURL = httpsIncluded(userURL);
-    linksDb.store(shortURLKey, longURL);
+    linksDb.store(shortURLKey, { longURL, timesClicked: 0 });
     const shortURL = `${baseURL}${shortURLKey}`;
     res.send(shortURL);
 })
 
 router.get('/:shortURL', (req, res, next) => {
     const shortURL = req.params.shortURL;
-    const longURL = linksDb.getValue(shortURL);
+    const longURL = linksDb.getValue(shortURL).longURL;
     if(!longURL) next('404');
     else{
-        res.redirect(longURL)
+        linksDb.store(shortURL, { longURL, timesClicked: linksDb.getValue(shortURL).timesClicked + 1});
+        res.redirect(longURL);
         // res.send();
     }
 })

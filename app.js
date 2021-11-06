@@ -5,6 +5,7 @@ const cors = require("cors");
 const { router: shortLinkRouter, setRouterDB } = require('./src/routers/shortLinkRouter');
 const errorHandler = require('./src/middlewares/errorHandler')
 const db = require('./src/data/database');
+
 const linksDb = new db();
 setRouterDB(linksDb);
 

@@ -5,7 +5,8 @@ class Database{
     // #db
     constructor(){
         // this.#db = {};
-        this.db = JSON.parse(fs.readFileSync(__dirname + '/db.json').toString()) || {};
+        const dbJson = fs.readFileSync(__dirname + '/db.json').toString();
+        this.db = dbJson ? JSON.parse(dbJson) : {};
     }
     store(key, value){
         // this.#db[key] = value;
