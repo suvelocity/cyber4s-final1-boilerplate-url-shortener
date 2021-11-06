@@ -41,5 +41,5 @@ so in last, i didnt use class who give me something new and i can do better with
 
 ## Technologies in EG-Short-URL :
 
-![HtmlLogo](./Readme-Assest/HTMLLOGO.svg) ![CssLogo](./Readme-Assest/CSSLOGO.svg) ![JsLogo](./Readme-Assest/JSLOGO.svg)
-![AxiosLogo](./Readme-Assest/AXIOSLOGO.svg) ![NodeLogo](./Readme-Assest/NODEJSLOGO.svg) ![HerokuLogo](./Readme-Assest/HEROKULOGO.svg)
+![HtmlLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/HTMLLOGO.svg) ![CssLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/CSSLOGO.svg) ![JsLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/JSLOGO.svg)
+![AxiosLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/AXIOSLOGO.svg) ![NodeLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/NODEJSLOGO.svg) ![HerokuLogo](https://github.com/ElayGelbart/cyber4s-final1-boilerplate-url-shortener/tree/Submission/Reademe-Assest/HEROKULOGO.svg)
